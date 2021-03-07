@@ -6,18 +6,21 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of heapsofpapers is to …
+The goal of `heapsofpapers` is to make it really easy to politely get,
+well, heaps of papers. For instance, you may want to understand the
+state of open code and open data across a bunch of different pre-print
+repositories, e.g. Collins and Alexander, 2021. In that case you need a
+way to quickly get heaps of papers.
+
+Essentially the main function in the package is a wrapper around
+`purrr::walk2` and `utils::download.file`, but there are a bunch of
+small things that make it handy to use instead of rolling your own each
+time. For instance, the package automatically slows down your requests
+by 5-10 seconds, it also prints where it is up to.
 
 ## Installation
 
-You can install the released version of heapsofpapers from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("heapsofpapers")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can `heapsofpapers` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -26,36 +29,31 @@ devtools::install_github("RohanAlexander/heapsofpapers")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Here is an example of getting two papers from socarxiv:
 
 ``` r
 library(heapsofpapers)
-## basic example code
+two_pdfs <-
+  tibble::tibble(
+    locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download",
+                      "https://osf.io/preprints/socarxiv/a29h8/download"),
+    save_here = c("~/competing_effects_on_the_average_age_of_infant_death.pdf",
+                  "~/cesr_an_r_package_for_the_canadian_election_study.pdf")
+    )
+
+heapsofpapers::get_these_and_save_them(two_pdfs$locations_are, two_pdfs$save_here)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Roadmap
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+-   Make the length of the pause dependent on the size of the file that
+    is downloaded, by default. Allow the user to specify how long they
+    would like to wait.
+-   Make the printing of the message again optional, or every X or
+    similar, as specified by the user.
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+## Citation
 
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+Please cite the package if you use it: Alexander, Rohan, and Annie
+Collins, 2021, ‘heapsofpapers: Easily get heaps of papers’ 6 March,
+<https://github.com/RohanAlexander/heapsofpapers>.
