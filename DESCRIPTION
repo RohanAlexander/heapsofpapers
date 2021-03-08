@@ -1,12 +1,18 @@
 Package: heapsofpapers
-Title: Easily Download Heaps of Content
+Title: Easily Download Heaps of Papers
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
     person(given = "Rohan",
            family = "Alexander",
            role = c("aut", "cre"),
            email = "rohan.alexander@utoronto.ca",
+           comment = c(ORCID = "YOUR-ORCID-ID")),
+    person(given = "Annie",
+           family = "Collins",
+           role = c("aut"),
+           email = "",
            comment = c(ORCID = "YOUR-ORCID-ID"))
+           )
 Description: This package makes it really easy to download a large number of PDFs.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -19,4 +25,5 @@ Imports:
     magrittr,
     tibble,
     purrr,
-    utils
+    utils,
+    dplyr

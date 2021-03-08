@@ -4,20 +4,29 @@
 \alias{get_these_and_save_them}
 \title{get_these_and_save_them}
 \usage{
-get_these_and_save_them(get_them_from_here, put_them_here)
+get_these_and_save_them(
+  get_them_from_here,
+  put_them_here_as_this,
+  wait_this_long = 7
+)
 }
 \arguments{
-\item{get_them_from_here}{A bunch of URLs where the PDFs are, usually a column.}
+\item{get_them_from_here}{A column of URLs from a tibble in character format.}
 
-\item{put_them_here}{A location on your computer to save the PDF to.}
+\item{put_them_here_as_this}{A column of filenames from a tibble that includes the full
+path, in character format, that specify where and what you would like to save
+the PDF as.}
+
+\item{wait_this_long}{integer, that indicates the number of seconds to wait
+between the requests. Automatically adds a bit of noise to lessen the effect
+on systematic processes that might be otherwise working.}
 }
 \description{
-The \code{download_pdfs} function works with one PDF takes a tibble of locations (usually
-URLs) and file names, and then downloads the PDF from the location to the file
-name, saving as it goes. It politely waits 10 seconds between calls to the
-location, skips locations that give an error and (optionally) prints a status
-message. It will also (optionally) let you know about any PDFs that are very
-small (which usually indicates there's something wrong with them).
+The \code{get_these_and_save_them} function works with a tibble of
+locations (usually URLs) and file names, and then downloads the PDF from the
+location to the file name, saving as it goes, and letting you know where it's
+up to. It politely waits around 7 seconds between calls to the
+location, and skips locations that give an error.
 }
 \examples{
 two_pdfs <-
