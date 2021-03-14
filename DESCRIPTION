@@ -7,6 +7,11 @@ Authors@R: c(
            role = c("aut", "cre"),
            email = "rohan.alexander@utoronto.ca",
            comment = c(ORCID = "YOUR-ORCID-ID")),
+    person(given = "A",
+           family = "Mahfouz",
+           role = c("aut"),
+           email = "",
+           comment = c(ORCID = "YOUR-ORCID-ID")),
     person(given = "Annie",
            family = "Collins",
            role = c("aut"),
@@ -26,4 +31,5 @@ Imports:
     tibble,
     purrr,
     utils,
-    dplyr
+    dplyr,
+    aws.s3

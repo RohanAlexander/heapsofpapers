@@ -2,6 +2,5 @@
 
 export("%>%")
 export(check_for_existence)
-export(get_these_and_save_them)
-export(get_this_and_save_it)
+export(get_and_save)
 importFrom(magrittr,"%>%")

@@ -13,7 +13,7 @@ bunch of different pre-print repositories, e.g. Collins and Alexander,
 2021. In that case you need a way to quickly download thousands of PDFs.
 
 Essentially, the main function in the package,
-`heapsofpapers::download_pdfs()` is a wrapper around `purrr::walk2` and
+`heapsofpapers::download_pdfs()` is a wrapper around a `for` loop and
 `utils::download.file`, but there are a bunch of small things that make
 it handy to use instead of rolling your own each time. For instance, the
 package automatically slows down your requests, lets you know where it
@@ -42,7 +42,36 @@ two_pdfs <-
                   "~/cesr_an_r_package_for_the_canadian_election_study.pdf")
     )
 
-heapsofpapers::get_these_and_save_them(two_pdfs$locations_are, two_pdfs$save_here)
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here"
+)
+```
+
+You could also specify the directory, for instance, if you have a folder
+called ‘inputs’.
+
+``` r
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  dir = "./inputs"
+)
+```
+
+Let’s say that you already had those PDFs, but weren’t sure. You could
+use check\_for\_existence to check
+
+``` r
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here"
+  )
+
+check_for_existence(".", two_pdfs, "save_here")
 ```
 
 ## Roadmap
@@ -50,12 +79,11 @@ heapsofpapers::get_these_and_save_them(two_pdfs$locations_are, two_pdfs$save_her
 -   ~~Allow the user to specify how long they would like to wait.~~
 -   ~~Add so that it checks whether the file exists and asks the user
     whether they’d like to re-download that or skip that.~~
+-   ~~Add option to save to AWS bucket~~
 -   Add tests.
 -   Add CI.
 -   Add message that estimates how long it’ll take and asking whether
     the user would like to proceed.
--   Option for save to AWS bucket (maybe can just use A’s code and bring
-    them in as a author?).
 -   Option to save to Dropbox.
 -   Make the length of the pause dependent on the size of the file that
     is downloaded, by default.
@@ -77,6 +105,6 @@ that you need to download.
 
 ## Citation
 
-Please cite the package if you use it: Alexander, Rohan, and Annie
-Collins, 2021, ‘heapsofpapers: Easily get heaps of papers’ 7 March,
-<https://github.com/RohanAlexander/heapsofpapers>.
+Please cite the package if you use it: Alexander, Rohan, Annie Collins,
+and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’ 13
+March, <https://github.com/RohanAlexander/heapsofpapers>.
