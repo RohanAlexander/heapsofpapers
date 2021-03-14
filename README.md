@@ -13,7 +13,7 @@ bunch of different pre-print repositories, e.g. Collins and Alexander,
 2021. In that case you need a way to quickly download thousands of PDFs.
 
 Essentially, the main function in the package,
-`heapsofpapers::download_pdfs()` is a wrapper around a `for` loop and
+`heapsofpapers::get_and_save()` is a wrapper around a `for` loop and
 `utils::download.file`, but there are a bunch of small things that make
 it handy to use instead of rolling your own each time. For instance, the
 package automatically slows down your requests, lets you know where it
@@ -84,6 +84,7 @@ check_for_existence(".", two_pdfs, "save_here")
 -   Add CI.
 -   Add message that estimates how long it’ll take and asking whether
     the user would like to proceed.
+-   Add examples of doing this for CSVs and for html.
 -   Option to save to Dropbox.
 -   Make the length of the pause dependent on the size of the file that
     is downloaded, by default.
@@ -92,7 +93,6 @@ check_for_existence(".", two_pdfs, "save_here")
 -   Add email notification for when it’s done.
 -   Add a check for any PDFs that are very small (which usually
     indicates there’s something wrong with them).
--   Add function that does same, but for CSVs.
 
 ## Related packages
 
