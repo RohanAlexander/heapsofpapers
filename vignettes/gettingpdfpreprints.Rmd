@@ -1,0 +1,19 @@
+---
+title: "Getting PDFs from pre-print servers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gettingpdfpreprints}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(heapsofpapers)
+```

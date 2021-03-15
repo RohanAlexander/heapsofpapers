@@ -33,3 +33,7 @@ Imports:
     utils,
     dplyr,
     aws.s3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
