@@ -1,5 +1,5 @@
 Package: heapsofpapers
-Title: Easily Download Heaps of Papers
+Title: Easily Download Heaps of PDFs, CSVs, or whatever else you can list.
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Rohan",
