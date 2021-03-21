@@ -49,8 +49,7 @@ get_and_save <-
     }
 
     if (delay < 5) {
-      stop("It's respectful to wait between calls to the server. Please either leave
-           blank (defaults to 5 seconds) or specify a value more than 5.")
+      stop("Please consider wiating longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value more than 5.")
     }
 
     # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?

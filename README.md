@@ -67,13 +67,8 @@ and didn’t want to download them again. You could use
 `check_for_existence` to check.
 
 ``` r
-heapsofpapers::get_and_save(
-  data = two_pdfs,
-  links = "locations_are",
-  save_names = "save_here"
-  )
-
-heapsofpapers::check_for_existence(".", two_pdfs, "save_here")
+heapsofpapers::check_for_existence(data = two_pdfs, 
+                                   save_names = "save_here")
 ```
 
 ## Roadmap
@@ -85,6 +80,7 @@ heapsofpapers::check_for_existence(".", two_pdfs, "save_here")
 -   ~~Add something that automatically looks at whether the folder
     exists and if not, creates it.~~
 -   ~~Don’t sleep after the last paper.~~
+-   ~~Update check\_for\_existence()~~
 -   Add vignettes of doing this for CSVs and for html.
 -   Add tests.
 -   Add CI.

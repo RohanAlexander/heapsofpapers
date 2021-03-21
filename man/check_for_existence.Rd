@@ -4,16 +4,16 @@
 \alias{check_for_existence}
 \title{check_for_existence}
 \usage{
-check_for_existence(check_here, the_dataset, the_column)
+check_for_existence(data, save_names = "save_names", dir = ".")
 }
 \arguments{
-\item{check_here}{A folder on your computer to save the PDFs to, for instance "/Desktop/arxiv"}
+\item{data}{A dataframe that contains URLs that you want to download and the names
+that you want to save them as.}
 
-\item{the_dataset}{The tibble that has the URLs that you'll be getting and the full filenames
-that you'd like to save them to.}
+\item{save_names}{The name of the column whose values should be the saved
+file names where the downloaded file will be saved, \code{id} by default.}
 
-\item{the_column}{The column that contains the full filenames that you'd like
-to save them to. This needs to be a character vector.}
+\item{dir}{The directory to download files to, defaults to current working directory.}
 }
 \description{
 The \code{check_for_existence} function looks at the folder that you're
@@ -25,8 +25,8 @@ then suggests that you filter to remove them.
  tibble::tibble(
   locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download",
     "https://osf.io/preprints/socarxiv/a29h8/download"),
-  save_here = c("~/competing_effects_on_the_average_age_of_infant_death.pdf",
-     "~/cesr_an_r_package_for_the_canadian_election_study.pdf")
+  save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf",
+     "cesr_an_r_package_for_the_canadian_election_study.pdf")
    )
 
 heapsofpapers::get_and_save(
@@ -35,6 +35,6 @@ links = "locations_are",
 save_names = "save_here"
 )
 
-check_for_existence("~", two_pdfs, "save_here")
+heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
 }
 }
