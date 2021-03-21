@@ -1,5 +1,5 @@
 Package: heapsofpapers
-Title: Easily Download Heaps of PDFs, CSVs, or whatever else you can list.
+Title: Easily Download Heaps of PDFs, CSVs, or whatever else you can list
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Rohan",
@@ -18,7 +18,7 @@ Authors@R: c(
            email = "",
            comment = c(ORCID = "YOUR-ORCID-ID"))
            )
-Description: This package makes it really easy to download a large number of PDFs.
+Description: This package makes it really easy to download a large number of files such as PDFs, CSVs and others.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -32,8 +32,12 @@ Imports:
     purrr,
     utils,
     dplyr,
-    aws.s3
+    aws.s3,
+    mockr,
+    curl
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
+Config/testthat/edition: 3

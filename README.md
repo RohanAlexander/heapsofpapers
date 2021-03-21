@@ -10,7 +10,8 @@ The goal of `heapsofpapers` is to make it really easy to respectfully
 get, well, heaps of papers (and CSVs and websites). For instance, you
 may want to understand the state of open code and open data across a
 bunch of different pre-print repositories, e.g. Collins and Alexander,
-2021. In that case you need a way to quickly download thousands of PDFs.
+2021, and in that case you need a way to quickly download thousands of
+PDFs.
 
 Essentially, the main function in the package,
 `heapsofpapers::get_and_save()` is a wrapper around a `for` loop and
@@ -61,8 +62,9 @@ heapsofpapers::get_and_save(
 )
 ```
 
-Let’s say that you already had those PDFs, but weren’t sure. You could
-use check\_for\_existence to check
+Let’s say that you had already downloaded some PDFs, but weren’t sure
+and didn’t want to download them again. You could use
+`check_for_existence` to check.
 
 ``` r
 heapsofpapers::get_and_save(
@@ -71,7 +73,7 @@ heapsofpapers::get_and_save(
   save_names = "save_here"
   )
 
-check_for_existence(".", two_pdfs, "save_here")
+heapsofpapers::check_for_existence(".", two_pdfs, "save_here")
 ```
 
 ## Roadmap
@@ -80,16 +82,19 @@ check_for_existence(".", two_pdfs, "save_here")
 -   ~~Add so that it checks whether the file exists and asks the user
     whether they’d like to re-download that or skip that.~~
 -   ~~Add option to save to AWS bucket~~
+-   ~~Add something that automatically looks at whether the folder
+    exists and if not, creates it.~~
+-   ~~Don’t sleep after the last paper.~~
+-   Add vignettes of doing this for CSVs and for html.
 -   Add tests.
 -   Add CI.
 -   Add message that estimates how long it’ll take and asking whether
     the user would like to proceed.
--   Add examples of doing this for CSVs and for html.
--   Option to save to Dropbox.
 -   Make the length of the pause dependent on the size of the file that
     is downloaded, by default.
 -   Make the printing of the message again optional, or every X or
     similar, as specified by the user.
+-   Option to save to Dropbox.
 -   Add email notification for when it’s done.
 -   Add a check for any PDFs that are very small (which usually
     indicates there’s something wrong with them).
@@ -106,5 +111,5 @@ that you need to download.
 ## Citation
 
 Please cite the package if you use it: Alexander, Rohan, Annie Collins,
-and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’ 13
+and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’ 20
 March, <https://github.com/RohanAlexander/heapsofpapers>.

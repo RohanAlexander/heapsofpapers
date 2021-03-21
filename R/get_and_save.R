@@ -38,6 +38,16 @@
 #'}
 get_and_save <-
   function(data, links = "links", save_names = "save_names", dir = ".", bucket = NULL, delay = 5){
+
+    if (isFALSE(curl::has_internet())) {
+      stop("The function get_and_save() needs the internet, but isn't able to find a connection right now.")
+    }
+
+    if (isFALSE(dir.exists(dir))){
+      # dir.create(dir)
+      stop("The specified directory does not exist. Please create it and then run get_and_save() again.")
+    }
+
     if (delay < 5) {
       stop("It's respectful to wait between calls to the server. Please either leave
            blank (defaults to 5 seconds) or specify a value more than 5.")
@@ -84,10 +94,14 @@ get_and_save <-
         print(message)
 
         # Pause before downloading the next paper
+        if (i == nrow(data)) {
+          print("All done!")
+        } else {
         Sys.sleep(
           sample(x = c((delay):(delay+5)),
                  size = 1)
         )
+        }
     }
   }
 
