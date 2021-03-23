@@ -57,13 +57,14 @@ get_and_save <-
 
     for (i in 1:nrow(data)) {
 
-        url <- data[i, links] %>% dplyr::pull()
-        file_name <- data[i, save_names] %>% dplyr::pull()
+        url <- data[i, ] %>% dplyr::pull(links)
+        file_name <- data[i, ] %>% dplyr::pull(save_names)
 
         # if no bucket is specified, save to disk
         if (is.null(bucket)) {
           save_path <- file.path(dir, file_name)
-          utils::download.file(url, save_path, mode = "wb")
+          tryCatch(utils::download.file(url, save_path, mode = "wb", quiet = FALSE),
+                   error = function(e) print(paste(url, 'did not download')))
         } else {
           # check system environment for s3 credentials
           if (nchar(Sys.getenv("AWS_ACCESS_KEY_ID")) < 16) {
