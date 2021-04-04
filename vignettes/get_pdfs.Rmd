@@ -1,0 +1,66 @@
+---
+title: "Getting PDFs from pre-print servers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting PDFs from pre-print servers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Just get some PDFs
+
+In this vignette we go through the process of getting some PDFs. First we need to set-up a tibble of papers that we are interested in.
+
+```{r, eval = FALSE}
+library(heapsofpapers)
+
+two_pdfs <-
+  tibble::tibble(
+    locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download",
+                      "https://osf.io/preprints/socarxiv/a29h8/download"),
+    save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf",
+                  "cesr_an_r_package_for_the_canadian_election_study.pdf")
+  )
+```
+
+Now we want to download those PDFs (this will just download them into the current working directory).
+
+```{r, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here"
+)
+```
+
+
+## Get some PDFs and save them in a particular folder
+
+Now it may be useful to have the PDFs saved into a specific folder. So this time make a folder 'inputs' in the current working directory. Those same PDFs will now be saved into that folder.
+
+```{r, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  dir = "./inputs"
+)
+```
+
+## Check which PDFs already exist in a particular folder
+
+Now we can check which of these we have.
+
+```{r, eval = FALSE}
+heapsofpapers::check_for_existence(data = two_pdfs, 
+                                   save_names = "save_here",
+                                   dir = "./inputs")
+```
+

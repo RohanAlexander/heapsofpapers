@@ -8,6 +8,13 @@
 
 <title>check_for_existence — check_for_existence • heapsofpapers</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 <meta property="og:description" content="The check_for_existence function looks at the folder that you're
 going to save your PDFs to and checks whether you've already got any of them. It
 then suggests that you filter to remove them." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -100,7 +108,13 @@ then suggests that you filter to remove them." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/gettingpdfpreprints.html">Getting PDFs from pre-print servers</a>
+      <a href="../articles/get_csvs.html">Getting CSVs</a>
+    </li>
+    <li>
+      <a href="../articles/get_html.html">Getting html</a>
+    </li>
+    <li>
+      <a href="../articles/get_pdfs.html">Getting PDFs from pre-print servers</a>
     </li>
     <li>
       <a href="../articles/s3_setup.html">Setting Up AWS S3 Credentials</a>
@@ -139,24 +153,24 @@ going to save your PDFs to and checks whether you've already got any of them. It
 then suggests that you filter to remove them.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_for_existence</span><span class='op'>(</span><span class='va'>check_here</span>, <span class='va'>the_dataset</span>, <span class='va'>the_column</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>check_for_existence</span><span class='op'>(</span><span class='va'>data</span>, save_names <span class='op'>=</span> <span class='st'>"save_names"</span>, dir <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>check_here</th>
-      <td><p>A folder on your computer to save the PDFs to, for instance "/Desktop/arxiv"</p></td>
+      <th>data</th>
+      <td><p>A dataframe that contains URLs that you want to download and the names
+that you want to save them as.</p></td>
     </tr>
     <tr>
-      <th>the_dataset</th>
-      <td><p>The tibble that has the URLs that you'll be getting and the full filenames
-that you'd like to save them to.</p></td>
+      <th>save_names</th>
+      <td><p>The name of the column whose values should be the saved
+file names where the downloaded file will be saved, <code>id</code> by default.</p></td>
     </tr>
     <tr>
-      <th>the_column</th>
-      <td><p>The column that contains the full filenames that you'd like
-to save them to. This needs to be a character vector.</p></td>
+      <th>dir</th>
+      <td><p>The directory to download files to, defaults to current working directory.</p></td>
     </tr>
     </table>
 
@@ -166,8 +180,8 @@ to save them to. This needs to be a character vector.</p></td>
  <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
   locations_are <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"https://osf.io/preprints/socarxiv/z4qg9/download"</span>,
     <span class='st'>"https://osf.io/preprints/socarxiv/a29h8/download"</span><span class='op'>)</span>,
-  save_here <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"~/competing_effects_on_the_average_age_of_infant_death.pdf"</span>,
-     <span class='st'>"~/cesr_an_r_package_for_the_canadian_election_study.pdf"</span><span class='op'>)</span>
+  save_here <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"competing_effects_on_the_average_age_of_infant_death.pdf"</span>,
+     <span class='st'>"cesr_an_r_package_for_the_canadian_election_study.pdf"</span><span class='op'>)</span>
    <span class='op'>)</span>
 
 <span class='fu'>heapsofpapers</span><span class='fu'>::</span><span class='fu'><a href='get_and_save.html'>get_and_save</a></span><span class='op'>(</span>
@@ -176,8 +190,8 @@ links <span class='op'>=</span> <span class='st'>"locations_are"</span>,
 save_names <span class='op'>=</span> <span class='st'>"save_here"</span>
 <span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in nrow(data): object 'two_pdfs' not found</span></div><div class='input'>
-<span class='fu'>check_for_existence</span><span class='op'>(</span><span class='st'>"~"</span>, <span class='va'>two_pdfs</span>, <span class='st'>"save_here"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in dplyr::mutate(., got_this_already = dplyr::if_else(the_dataset[[the_column]] %in%     already_got, 1, 0)): object 'two_pdfs' not found</span></div><div class='input'>
+<span class='fu'>heapsofpapers</span><span class='fu'>::</span><span class='fu'>check_for_existence</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>two_pdfs</span>, save_names <span class='op'>=</span> <span class='st'>"save_here"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in dplyr::mutate(., save_names = paste0(dir, "/", data[[save_names]])): object 'two_pdfs' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -190,7 +204,7 @@ save_names <span class='op'>=</span> <span class='st'>"save_here"</span>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Rohan Alexander, A Mahfouz, Annie Collins.</p>
+  <p>Developed by Rohan Alexander, A Mahfouz.</p>
 </div>
 
 <div class="pkgdown">

@@ -2,8 +2,10 @@ pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  gettingpdfpreprints: gettingpdfpreprints.html
+  get_csvs: get_csvs.html
+  get_html: get_html.html
+  get_pdfs: get_pdfs.html
   heapsofpapers: heapsofpapers.html
   s3_setup: s3_setup.html
-last_built: 2021-03-15T01:00Z
+last_built: 2021-04-04T18:23Z
 

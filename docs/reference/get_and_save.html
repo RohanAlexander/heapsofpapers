@@ -8,6 +8,13 @@
 
 <title>get_these_and_save_them — get_and_save • heapsofpapers</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -45,6 +52,7 @@ locations (usually URLs) and file names, and then downloads the PDF from the
 location to the file name, saving as it goes, and letting you know where it's
 up to. It politely waits around 7 seconds between calls to the
 location, and skips locations that give an error." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -102,7 +110,13 @@ location, and skips locations that give an error." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/gettingpdfpreprints.html">Getting PDFs from pre-print servers</a>
+      <a href="../articles/get_csvs.html">Getting CSVs</a>
+    </li>
+    <li>
+      <a href="../articles/get_html.html">Getting html</a>
+    </li>
+    <li>
+      <a href="../articles/get_pdfs.html">Getting PDFs from pre-print servers</a>
     </li>
     <li>
       <a href="../articles/s3_setup.html">Setting Up AWS S3 Credentials</a>
@@ -131,7 +145,7 @@ location, and skips locations that give an error." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>get_these_and_save_them</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RohanAlexander/heapsofpapers/blob/master/R/get_these_and_save_them.R'><code>R/get_these_and_save_them.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/RohanAlexander/heapsofpapers/blob/master/R/get_and_save.R'><code>R/get_and_save.R</code></a></small>
     <div class="hidden name"><code>get_and_save.Rd</code></div>
     </div>
 
@@ -149,7 +163,8 @@ location, and skips locations that give an error.</p>
   save_names <span class='op'>=</span> <span class='st'>"save_names"</span>,
   dir <span class='op'>=</span> <span class='st'>"."</span>,
   bucket <span class='op'>=</span> <span class='cn'>NULL</span>,
-  delay <span class='op'>=</span> <span class='fl'>5</span>
+  delay <span class='op'>=</span> <span class='fl'>5</span>,
+  print_every <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -184,6 +199,12 @@ file names where the downloaded file will be saved, <code>id</code> by default.<
 minimum) is five seconds. We automatically add a bit of noise to lessen the effect
 on systematic processes that might be otherwise working.</p></td>
     </tr>
+    <tr>
+      <th>print_every</th>
+      <td><p>The default is that you get a print message for every file, but
+you can change this. If you want to print an update for every second file then
+set this equal to 2, for a printed update every tenth file, set it to 10, etc.</p></td>
+    </tr>
     </table>
 
 
@@ -214,7 +235,7 @@ save_names <span class='op'>=</span> <span class='st'>"save_here"</span>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Rohan Alexander, A Mahfouz, Annie Collins.</p>
+  <p>Developed by Rohan Alexander, A Mahfouz.</p>
 </div>
 
 <div class="pkgdown">

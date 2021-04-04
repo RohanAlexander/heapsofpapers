@@ -1,9 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# heapsofpapers
+# heapsofpapers <img src="man/figures/logo.png" align="right" height="200" />
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/RohanAlexander/heapsofpapers/workflows/R-CMD-check/badge.svg)](https://github.com/RohanAlexander/heapsofpapers/actions)
 <!-- badges: end -->
 
 The goal of `heapsofpapers` is to make it really easy to respectfully
@@ -22,7 +24,7 @@ is up to, and adjusts for papers that you’ve already downloaded.
 
 ## Installation
 
-You can `heapsofpapers` from [GitHub](https://github.com/) with:
+You can install `heapsofpapers` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -81,15 +83,15 @@ heapsofpapers::check_for_existence(data = two_pdfs,
     exists and if not, creates it.~~
 -   ~~Don’t sleep after the last paper.~~
 -   ~~Update check\_for\_existence()~~
--   Add vignettes of doing this for CSVs and for html.
+-   ~~Add vignettes of doing this for CSVs and for html.~~
+-   ~~Make the printing of the message again optional, or every X or
+    similar, as specified by the user.~~
 -   Add tests.
 -   Add CI.
 -   Add message that estimates how long it’ll take and asking whether
     the user would like to proceed.
 -   Make the length of the pause dependent on the size of the file that
     is downloaded, by default.
--   Make the printing of the message again optional, or every X or
-    similar, as specified by the user.
 -   Option to save to Dropbox.
 -   Add email notification for when it’s done.
 -   Add a check for any PDFs that are very small (which usually
@@ -106,6 +108,6 @@ that you need to download.
 
 ## Citation
 
-Please cite the package if you use it: Alexander, Rohan, Annie Collins,
-and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’ 20
-March, <https://github.com/RohanAlexander/heapsofpapers>.
+Please cite the package if you use it: Alexander, Rohan, and A Mahfouz,
+2021, ‘heapsofpapers: Easily get heaps of papers’, 4 April,
+<https://github.com/RohanAlexander/heapsofpapers>.

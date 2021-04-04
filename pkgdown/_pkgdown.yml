@@ -1,0 +1,13 @@
+destination: docs
+url: https://rohanalexander.github.io/heapsofpapers/
+navbar:
+  type: inverse
+
+articles:
+  - title: ~
+    navbar: Articles
+    contents:
+    - articles/get_pdfs
+    - articles/get_html
+    - articles/get_csvs
+    - articles/s3_setup

@@ -10,7 +10,8 @@ get_and_save(
   save_names = "save_names",
   dir = ".",
   bucket = NULL,
-  delay = 5
+  delay = 5,
+  print_every = 1
 )
 }
 \arguments{
@@ -30,6 +31,10 @@ file names where the downloaded file will be saved, \code{id} by default.}
 \item{delay}{The number of seconds to wait between downloads, default (and
 minimum) is five seconds. We automatically add a bit of noise to lessen the effect
 on systematic processes that might be otherwise working.}
+
+\item{print_every}{The default is that you get a print message for every file, but
+you can change this. If you want to print an update for every second file then
+set this equal to 2, for a printed update every tenth file, set it to 10, etc.}
 }
 \description{
 The \code{get_and_save} function works with a tibble of

@@ -1,0 +1,42 @@
+---
+title: "Getting CSVs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting CSVs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Just get some CSVs
+
+In this vignette we go through the process of getting some CSVs First we need to set-up a tibble of papers that we are interested in.
+
+```{r, eval = FALSE}
+library(heapsofpapers)
+
+two_csvs <-
+  tibble::tibble(
+    locations_are = c("https://raw.githubusercontent.com/RohanAlexander/australian_politicians/master/outputs/australian_politicians-all.csv",
+                      "https://raw.githubusercontent.com/RohanAlexander/australian_politicians/master/outputs/australian_politicians-all.csv"),
+    save_here = c("auspol_1.csv",
+                  "auspol_2.csv")
+  )
+```
+
+Now we want to download those PDFs (this will just download them into the current working directory).
+
+```{r, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_csvs,
+  links = "locations_are",
+  save_names = "save_here"
+)
+```
+

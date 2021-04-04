@@ -5,14 +5,21 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Easily Download Heaps of PDFs, CSVs, or whatever else you can list. • heapsofpapers</title>
+<title>Easily Download Heaps of PDFs, CSVs, or whatever else you can list • heapsofpapers</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Easily Download Heaps of PDFs, CSVs, or whatever else you can list.">
-<meta property="og:description" content="This package makes it really easy to download a large number of PDFs.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Easily Download Heaps of PDFs, CSVs, or whatever else you can list">
+<meta property="og:description" content="This package makes it really easy to download a large number of files such as PDFs, CSVs and others.">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -57,7 +64,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/gettingpdfpreprints.html">Getting PDFs from pre-print servers</a>
+      <a href="articles/get_csvs.html">Getting CSVs</a>
+    </li>
+    <li>
+      <a href="articles/get_html.html">Getting html</a>
+    </li>
+    <li>
+      <a href="articles/get_pdfs.html">Getting PDFs from pre-print servers</a>
     </li>
     <li>
       <a href="articles/s3_setup.html">Setting Up AWS S3 Credentials</a>
@@ -84,20 +97,18 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="heapsofpapers" class="section level1">
+<div id="heapsofpapers-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#heapsofpapers" class="anchor"></a>heapsofpapers</h1></div>
+<a href="#heapsofpapers-" class="anchor"></a>heapsofpapers <img src="reference/figures/logo.png" align="right" height="200">
+</h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
-<p>The goal of <code>heapsofpapers</code> is to make it really easy to respectfully get, well, heaps of papers (and CSVs and websites). For instance, you may want to understand the state of open code and open data across a bunch of different pre-print repositories, e.g. Collins and Alexander,</p>
-<ol>
-<li>In that case you need a way to quickly download thousands of PDFs.</li>
-</ol>
+
+<p>The goal of <code>heapsofpapers</code> is to make it really easy to respectfully get, well, heaps of papers (and CSVs and websites). For instance, you may want to understand the state of open code and open data across a bunch of different pre-print repositories, e.g. Collins and Alexander, 2021, and in that case you need a way to quickly download thousands of PDFs.</p>
 <p>Essentially, the main function in the package, <code><a href="reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> is a wrapper around a <code>for</code> loop and <code><a href="https://rdrr.io/r/utils/download.file.html">utils::download.file</a></code>, but there are a bunch of small things that make it handy to use instead of rolling your own each time. For instance, the package automatically slows down your requests, lets you know where it is up to, and adjusts for papers that you’ve already downloaded.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can <code>heapsofpapers</code> from <a href="https://github.com/">GitHub</a> with:</p>
+<p>You can install <code>heapsofpapers</code> from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"RohanAlexander/heapsofpapers"</span><span class="op">)</span></code></pre></div>
@@ -129,15 +140,10 @@
   save_names <span class="op">=</span> <span class="st">"save_here"</span>,
   dir <span class="op">=</span> <span class="st">"./inputs"</span>
 <span class="op">)</span></code></pre></div>
-<p>Let’s say that you already had those PDFs, but weren’t sure. You could use check_for_existence to check</p>
+<p>Let’s say that you had already downloaded some PDFs, but weren’t sure and didn’t want to download them again. You could use <code>check_for_existence</code> to check.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">two_pdfs</span>,
-  links <span class="op">=</span> <span class="st">"locations_are"</span>,
-  save_names <span class="op">=</span> <span class="st">"save_here"</span>
-  <span class="op">)</span>
-
-<span class="fu"><a href="reference/check_for_existence.html">check_for_existence</a></span><span class="op">(</span><span class="st">"."</span>, <span class="va">two_pdfs</span>, <span class="st">"save_here"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="reference/check_for_existence.html">check_for_existence</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">two_pdfs</span>, 
+                                   save_names <span class="op">=</span> <span class="st">"save_here"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="roadmap" class="section level2">
 <h2 class="hasAnchor">
@@ -146,13 +152,16 @@
 <li><del>Allow the user to specify how long they would like to wait.</del></li>
 <li><del>Add so that it checks whether the file exists and asks the user whether they’d like to re-download that or skip that.</del></li>
 <li><del>Add option to save to AWS bucket</del></li>
+<li><del>Add something that automatically looks at whether the folder exists and if not, creates it.</del></li>
+<li><del>Don’t sleep after the last paper.</del></li>
+<li><del>Update check_for_existence()</del></li>
+<li><del>Add vignettes of doing this for CSVs and for html.</del></li>
+<li><del>Make the printing of the message again optional, or every X or similar, as specified by the user.</del></li>
 <li>Add tests.</li>
 <li>Add CI.</li>
 <li>Add message that estimates how long it’ll take and asking whether the user would like to proceed.</li>
-<li>Add examples of doing this for CSVs and for html.</li>
-<li>Option to save to Dropbox.</li>
 <li>Make the length of the pause dependent on the size of the file that is downloaded, by default.</li>
-<li>Make the printing of the message again optional, or every X or similar, as specified by the user.</li>
+<li>Option to save to Dropbox.</li>
 <li>Add email notification for when it’s done.</li>
 <li>Add a check for any PDFs that are very small (which usually indicates there’s something wrong with them).</li>
 </ul>
@@ -165,7 +174,7 @@
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
-<p>Please cite the package if you use it: Alexander, Rohan, Annie Collins, and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’ 13 March, <a href="https://github.com/RohanAlexander/heapsofpapers" class="uri">https://github.com/RohanAlexander/heapsofpapers</a>.</p>
+<p>Please cite the package if you use it: Alexander, Rohan, and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’, 4 April, <a href="https://github.com/RohanAlexander/heapsofpapers" class="uri">https://github.com/RohanAlexander/heapsofpapers</a>.</p>
 </div>
 </div>
   </div>
@@ -190,18 +199,23 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Rohan Alexander <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>A Mahfouz <br><small class="roles"> Author </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Annie Collins <br><small class="roles"> Author </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Rohan Alexander <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-1279-0700" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>A Mahfouz <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/RohanAlexander/heapsofpapers/actions"><img src="https://github.com/RohanAlexander/heapsofpapers/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Rohan Alexander, A Mahfouz, Annie Collins.</p>
+  <p>Developed by Rohan Alexander, A Mahfouz.</p>
 </div>
 
 <div class="pkgdown">

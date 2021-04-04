@@ -6,17 +6,11 @@ Authors@R: c(
            family = "Alexander",
            role = c("aut", "cre"),
            email = "rohan.alexander@utoronto.ca",
-           comment = c(ORCID = "YOUR-ORCID-ID")),
+           comment = c(ORCID = "0000-0003-1279-0700")),
     person(given = "A",
            family = "Mahfouz",
            role = c("aut"),
-           email = "",
-           comment = c(ORCID = "YOUR-ORCID-ID")),
-    person(given = "Annie",
-           family = "Collins",
-           role = c("aut"),
-           email = "",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "")
            )
 Description: This package makes it really easy to download a large number of files such as PDFs, CSVs and others.
 License: MIT + file LICENSE
