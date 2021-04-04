@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# heapsofpapers <img src="man/figures/logo.png" align="right" height="200" />
+# heapsofpapers <img src="man/figures/IMG_0864.png" align="right" height="200" />
 
 <!-- badges: start -->
 
@@ -86,16 +86,18 @@ heapsofpapers::check_for_existence(data = two_pdfs,
 -   ~~Add vignettes of doing this for CSVs and for html.~~
 -   ~~Make the printing of the message again optional, or every X or
     similar, as specified by the user.~~
--   Add tests.
--   Add CI.
+-   ~~Add some tests!~~
+-   ~~Add CI.~~
 -   Add message that estimates how long it’ll take and asking whether
     the user would like to proceed.
 -   Make the length of the pause dependent on the size of the file that
     is downloaded, by default.
--   Option to save to Dropbox.
--   Add email notification for when it’s done.
 -   Add a check for any PDFs that are very small (which usually
     indicates there’s something wrong with them).
+-   Make the behaviour more sophisticated when the file doesn’t exist.
+-   Add tests of whether the internet is on.
+-   Option to save to Dropbox.
+-   Add email notification for when it’s done.
 
 ## Related packages
 

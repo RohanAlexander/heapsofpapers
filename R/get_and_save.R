@@ -47,12 +47,15 @@ get_and_save <-
     }
 
     if (isFALSE(dir.exists(dir))){
-      # dir.create(dir)
       stop("The specified directory does not exist. Please create it and then run get_and_save() again.")
     }
 
     if (delay < 5) {
-      stop("Please consider wiating longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value more than 5.")
+      stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value more than 5.")
+    }
+
+    if (!is.numeric(print_every)){
+      stop("The specified value to print_every is not a number - please either leave blank or specify a number.")
     }
 
     # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?
@@ -67,7 +70,7 @@ get_and_save <-
         if (is.null(bucket)) {
           save_path <- file.path(dir, file_name)
           tryCatch(utils::download.file(url, save_path, mode = "wb", quiet = FALSE),
-                   error = function(e) print(paste(url, 'did not download')))
+                   error = function(e) print(paste(url, 'Did not download')))
         } else {
           # check system environment for s3 credentials
           if (nchar(Sys.getenv("AWS_ACCESS_KEY_ID")) < 16) {

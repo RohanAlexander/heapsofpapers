@@ -2,7 +2,7 @@
 title: "Introduction to heapsofpapers"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{heapsofpapers}
+  %\VignetteIndexEntry{Introduction to heapsofpapers}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
