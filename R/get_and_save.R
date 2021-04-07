@@ -50,7 +50,7 @@ get_and_save <-
       stop("The specified directory does not exist. Please create it and then run get_and_save() again.")
     }
 
-    if (delay < 5) {
+    if (delay < 1) {
       stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value more than 5.")
     }
 
