@@ -28,7 +28,9 @@ Imports:
     dplyr,
     aws.s3,
     mockr,
-    curl
+    curl,
+    progressr,
+    scales
 Suggests: 
     knitr,
     rmarkdown,

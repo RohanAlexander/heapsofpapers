@@ -47,11 +47,17 @@ get_and_save <-
     }
 
     if (isFALSE(dir.exists(dir))){
-      stop("The specified directory does not exist. Please create it and then run get_and_save() again.")
+      ask <- askYesNo("The specified directory does not exist. Would you like it to be created?")
+
+      if (ask == TRUE){
+        dir.create(dir)
+      } else {
+        stop()
+        }
     }
 
     if (delay < 1) {
-      stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value more than 5.")
+      stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value that is at least 1.")
     }
 
     if (!is.numeric(print_every)){
@@ -60,6 +66,9 @@ get_and_save <-
 
     # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?
     # A has a check for PDF in the save_names column - that's a good idea, but limits the use - could ask the user to specify?
+    # progressr::handlers(global = TRUE)
+
+    p <- progressr::progressor(steps = nrow(data))
 
     for (i in 1:nrow(data)) {
 
@@ -96,17 +105,28 @@ get_and_save <-
         }
 
         # Let the user know where it's up to
-        message <- paste0("The file from ", url, " has been saved to ", save_path, " at ", Sys.time(), ".")
+        # Check if the file downloaded:
+        got_file <- file.exists(save_path)
+        if (got_file == TRUE) {
+          message <- paste0("The file from ", url, " has been saved to ", save_path, " at ", Sys.time(), ". You're done with ", scales::percent(i / nrow(data)), ".")
+        } else {
+          message <- paste0("The file from ", url, " was not saved at ", Sys.time(), ". You're done with ", scales::percent(i / nrow(data)), ".")
+        }
+
         if (i%%print_every == 0) {
           print(message)
         }
 
         # Pause before downloading the next paper
         if (i == nrow(data)) {
+          # No need to pause after the last file
           print("All done!")
+        } else if (got_file == FALSE) {
+          # No need to pause if the file wasn't downloaded
+          Sys.sleep(0)
         } else {
         Sys.sleep(
-          sample(x = c((delay):(delay+5)),
+          sample(x = c((delay):min(delay*2,(delay+5))),
                  size = 1)
         )
         }

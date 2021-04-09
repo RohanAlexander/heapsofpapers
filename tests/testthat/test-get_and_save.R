@@ -1,12 +1,23 @@
 
-test_that("get_and_save errors if passed a directory that doesn't exist", {
-  # User specifies a directory that doesn't exist
-  expect_error(
-    heapsofpapers::get_and_save(data = two_pdfs,
-                                save_names = "save_names",
-                                dir = "baby_beluga_in_the_deep_blue_sea"),
-    "The specified directory does"
+test_that("get_and_save creates the directory if it doesn't exist", {
+  one_pdf <-
+    tibble::tibble(
+      locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
+      save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf")
     )
+
+  # User specifies a directory that doesn't exist
+  heapsofpapers::get_and_save(data = one_pdf,
+                              links = "locations_are",
+                              save_names = "save_here",
+                              dir = "baby_beluga_in_the_deep_blue_sea")
+
+  does_it_exist <- dir.exists("baby_beluga_in_the_deep_blue_sea")
+
+  unlink("baby_beluga_in_the_deep_blue_sea", recursive = TRUE)
+  # This doesn't work
+
+  expect_equal(does_it_exist, TRUE)
   }
   )
 
