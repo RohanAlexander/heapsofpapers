@@ -109,6 +109,8 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
   skip_if_offline()
   skip_on_cran()
 
+  dir_temp <- tempdir()
+
   one_pdf <-
     tibble::tibble(
       locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
@@ -118,7 +120,8 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
   heapsofpapers::get_and_save(
     data = one_pdf,
     links = "locations_are",
-    save_names = "save_here"
+    save_names = "save_here",
+    dir = dir_temp
   )
 
   expect_error(
@@ -126,12 +129,13 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
       data = one_pdf,
       links = "locations_are",
       save_names = "save_here",
+      dir = dir_temp,
       dupe_strategy = "ignore"
     ),
     "There is nothing left to get. Possibly"
   )
 
-  file_to_check_does_not_download_twice <- "competing_effects_on_the_average_age_of_infant_death.pdf"
+  file_to_check_does_not_download_twice <- file.path(dir_temp, "competing_effects_on_the_average_age_of_infant_death.pdf")
 
   file.remove(file_to_check_does_not_download_twice)
 
