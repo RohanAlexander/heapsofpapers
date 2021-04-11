@@ -152,11 +152,12 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
       links = "locations_are",
       save_names = "save_here"
     ),
-    "URL 'https://should_error': status"
+    "URL"
   )
 
   check_downloaded <- file.exists("./cesr_an_r_package_for_the_canadian_election_study.pdf")
   file.remove("./cesr_an_r_package_for_the_canadian_election_study.pdf")
+
   expect_equal(check_downloaded, TRUE)
 
 }

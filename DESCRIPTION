@@ -1,5 +1,5 @@
 Package: heapsofpapers
-Title: Easily Download Heaps of PDFs, CSVs, or whatever else you can list
+Title: Easily Download Heaps of PDFs, CSVs, or Whatever Else you can List
 Version: 0.0.0.9000
 Authors@R: c(
     person(given = "Rohan",
@@ -11,7 +11,7 @@ Authors@R: c(
            family = "Mahfouz",
            role = c("aut"))
            )
-Description: This package makes it really easy to download a large number of files such as PDFs, CSVs and others.
+Description: Makes it really easy to download a large number of files such as PDFs, CSVs and others.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
