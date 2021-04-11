@@ -92,8 +92,10 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
     save_names = "save_here"
   )
 
-  check_downloaded <- file.exists("./competing_effects_on_the_average_age_of_infant_death.pdf")
-  file.remove("./competing_effects_on_the_average_age_of_infant_death.pdf")
+  file_to_check_does_download <- file.path(".", "competing_effects_on_the_average_age_of_infant_death.pdf" )
+
+  check_downloaded <- file.exists(file_to_check_does_download)
+  file.remove(file_to_check_does_download)
   expect_equal(check_downloaded, TRUE)
 
 }
@@ -127,7 +129,9 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
     "There is nothing left to get. Possibly"
   )
 
-  file.remove("./competing_effects_on_the_average_age_of_infant_death.pdf")
+  file_to_check_does_not_download_twice <- file.path(".", "competing_effects_on_the_average_age_of_infant_death.pdf" )
+
+  file.remove(file_to_check_does_not_download_twice)
 
 }
 )
@@ -152,15 +156,19 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
     save_names = "save_here"
   )
 
-  check_did_not_download <- file.exists("./should_error.pdf")
+  file_to_check_did_not_download <- file.path(".", "should_error.pdf" )
+
+  check_did_not_download <- file.exists(file_to_check_did_not_download)
   if (check_did_not_download == TRUE) {
-    file.remove("./should_error.pdf")
+    file.remove(file_to_check_did_not_download)
   }
 
   expect_equal(check_did_not_download, FALSE)
 
-  check_downloaded <- file.exists("./cesr_an_r_package_for_the_canadian_election_study.pdf")
-  file.remove("./cesr_an_r_package_for_the_canadian_election_study.pdf")
+  file_to_check_did_download <- file.path(".", "cesr_an_r_package_for_the_canadian_election_study.pdf" )
+
+  check_downloaded <- file.exists(file_to_check_did_download)
+  file.remove(file_to_check_did_download)
 
   expect_equal(check_downloaded, TRUE)
 
