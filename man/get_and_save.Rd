@@ -11,7 +11,8 @@ get_and_save(
   dir = ".",
   bucket = NULL,
   delay = 5,
-  print_every = 1
+  print_every = 1,
+  dupe_strategy = "overwrite"
 )
 }
 \arguments{
@@ -19,12 +20,12 @@ get_and_save(
 that you want to save them as.}
 
 \item{links}{The name of the column whose values should be the URLs that you
-want to download, \code{link_pdf} by default.}
+want to download, \code{links} by default.}
 
 \item{save_names}{The name of the column whose values should be the saved
-file names where the downloaded file will be saved, \code{id} by default.}
+file names where the downloaded file will be saved, \code{save_names} by default.}
 
-\item{dir}{The directory to download files to, defaults to current working directory.}
+\item{dir}{The directory to download files to, current working directory by default.}
 
 \item{bucket}{name of AWS S3 bucket to save files to.}
 
@@ -35,12 +36,17 @@ on systematic processes that might be otherwise working.}
 \item{print_every}{The default is that you get a print message for every file, but
 you can change this. If you want to print an update for every second file then
 set this equal to 2, for a printed update every tenth file, set it to 10, etc.}
+
+\item{dupe_strategy}{There are a variety of ways of dealing with the situation where
+you already have some of the files downloaded. By default the function will just get
+them again and overwrite. However you can also specify 'ignore' in which case those
+files will be ignored. You can also investigate duplicates yourself using heapsofpapers::check_for_existence().}
 }
 \description{
 The \code{get_and_save} function works with a tibble of
 locations (usually URLs) and file names, and then downloads the PDF from the
 location to the file name, saving as it goes, and letting you know where it's
-up to. It politely waits around 7 seconds between calls to the
+up to. It politely waits around 5 seconds between calls to the
 location, and skips locations that give an error.
 }
 \examples{

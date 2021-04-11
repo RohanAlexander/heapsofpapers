@@ -11,9 +11,9 @@ check_for_existence(data, save_names = "save_names", dir = ".")
 that you want to save them as.}
 
 \item{save_names}{The name of the column whose values should be the saved
-file names where the downloaded file will be saved, \code{id} by default.}
+file names where the downloaded file will be saved, \code{save_names} by default.}
 
-\item{dir}{The directory to download files to, defaults to current working directory.}
+\item{dir}{The directory to download files to, current working directory by default.}
 }
 \description{
 The \code{check_for_existence} function looks at the folder that you're

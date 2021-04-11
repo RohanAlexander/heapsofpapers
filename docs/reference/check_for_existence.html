@@ -166,11 +166,11 @@ that you want to save them as.</p></td>
     <tr>
       <th>save_names</th>
       <td><p>The name of the column whose values should be the saved
-file names where the downloaded file will be saved, <code>id</code> by default.</p></td>
+file names where the downloaded file will be saved, <code>save_names</code> by default.</p></td>
     </tr>
     <tr>
       <th>dir</th>
-      <td><p>The directory to download files to, defaults to current working directory.</p></td>
+      <td><p>The directory to download files to, current working directory by default.</p></td>
     </tr>
     </table>
 
@@ -189,9 +189,9 @@ data <span class='op'>=</span> <span class='va'>two_pdfs</span>,
 links <span class='op'>=</span> <span class='st'>"locations_are"</span>,
 save_names <span class='op'>=</span> <span class='st'>"save_here"</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in nrow(data): object 'two_pdfs' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): object 'two_pdfs' not found</span></div><div class='input'>
 <span class='fu'>heapsofpapers</span><span class='fu'>::</span><span class='fu'>check_for_existence</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>two_pdfs</span>, save_names <span class='op'>=</span> <span class='st'>"save_here"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in dplyr::mutate(., save_names = paste0(dir, "/", data[[save_names]])): object 'two_pdfs' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='error'>Error in dplyr::mutate(., save_names_full_path = paste0(dir, "/", data[[save_names]])): object 'two_pdfs' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -7,8 +7,8 @@
 #' @param data A dataframe that contains URLs that you want to download and the names
 #' that you want to save them as.
 #' @param save_names The name of the column whose values should be the saved
-#' file names where the downloaded file will be saved, `id` by default.
-#' @param dir The directory to download files to, defaults to current working directory.
+#' file names where the downloaded file will be saved, `save_names` by default.
+#' @param dir The directory to download files to, current working directory by default.
 #'
 #' @description The `check_for_existence` function looks at the folder that you're
 #' going to save your PDFs to and checks whether you've already got any of them. It
@@ -32,38 +32,33 @@
 #' heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
 
 #'}
+#' @importFrom rlang .data
 check_for_existence <-
   function(data, save_names = "save_names", dir = "."){
 
     if (isFALSE(dir.exists(dir))){
-      # dir.create(dir)
-      stop("The specified directory does not exist. Please create it and then run get_and_save() again.")
+      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+
+      if (ask == TRUE){
+        dir.create(dir)
+      } else {
+        stop()
+      }
     }
-
-    # dir <- "."
-
-    # data <- two_pdfs <-
-    #   tibble::tibble(
-    #     locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download",
-    #                       "https://osf.io/preprints/socarxiv/a29h8/download"),
-    #     save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf",
-    #                   "cesr_an_r_package_for_the_canadian_election_study.pdf")
-    #   )
-    # save_names <- "save_here"
 
     # Check what's already been downloaded
     already_got <- list.files(path = dir, full.names = TRUE)
 
     data <-
       data %>%
-      dplyr::mutate(save_names = paste0(dir, "/",  data[[save_names]])) %>%
+      dplyr::mutate(save_names_full_path = paste0(dir, "/",  data[[save_names]])) %>%
       dplyr::mutate(got_this_already = dplyr::if_else(
-        save_names %in% already_got,
+        .data$save_names_full_path %in% already_got,
         1,
         0)
       )
 
-    message <- paste0("You already have ", sum(data$got_this_already, na.rm = TRUE), " of these. Consider filtering before running `get_these_and_save_them()`")
+    message <- paste0("You already have ", sum(data$got_this_already, na.rm = TRUE), " of these. Consider filtering before running `get_and_save()` or running `get_and_save()` with dupe_strategy = 'ignore'.")
     print(message)
     return(data)
   }

@@ -6,10 +6,10 @@
 #' @param data A dataframe that contains URLs that you want to download and the names
 #' that you want to save them as.
 #' @param links The name of the column whose values should be the URLs that you
-#' want to download, `link_pdf` by default.
+#' want to download, `links` by default.
 #' @param save_names The name of the column whose values should be the saved
-#' file names where the downloaded file will be saved, `id` by default.
-#' @param dir The directory to download files to, defaults to current working directory.
+#' file names where the downloaded file will be saved, `save_names` by default.
+#' @param dir The directory to download files to, current working directory by default.
 #' @param bucket name of AWS S3 bucket to save files to.
 #' @param delay The number of seconds to wait between downloads, default (and
 #' minimum) is five seconds. We automatically add a bit of noise to lessen the effect
@@ -17,11 +17,15 @@
 #' @param print_every The default is that you get a print message for every file, but
 #' you can change this. If you want to print an update for every second file then
 #' set this equal to 2, for a printed update every tenth file, set it to 10, etc.
+#' @param dupe_strategy There are a variety of ways of dealing with the situation where
+#' you already have some of the files downloaded. By default the function will just get
+#' them again and overwrite. However you can also specify 'ignore' in which case those
+#' files will be ignored. You can also investigate duplicates yourself using heapsofpapers::check_for_existence().
 #'
 #' @description The `get_and_save` function works with a tibble of
 #' locations (usually URLs) and file names, and then downloads the PDF from the
 #' location to the file name, saving as it goes, and letting you know where it's
-#' up to. It politely waits around 7 seconds between calls to the
+#' up to. It politely waits around 5 seconds between calls to the
 #' location, and skips locations that give an error.
 #'
 #' @examples
@@ -39,15 +43,24 @@
 #' save_names = "save_here"
 #' )
 #'}
+#' @importFrom rlang .data
 get_and_save <-
-  function(data, links = "links", save_names = "save_names", dir = ".", bucket = NULL, delay = 5, print_every = 1){
+  function(data, links = "links", save_names = "save_names", dir = ".", bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
 
     if (isFALSE(curl::has_internet())) {
       stop("The function get_and_save() needs the internet, but isn't able to find a connection right now.")
     }
 
+    if (!is.data.frame(data)){
+      stop("The specified value to data is not a data frame.")
+    }
+
+    if (!is.character(save_names)){
+      stop("The specified value to save_names is not a character.")
+    }
+
     if (isFALSE(dir.exists(dir))){
-      ask <- askYesNo("The specified directory does not exist. Would you like it to be created?")
+      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
       if (ask == TRUE){
         dir.create(dir)
@@ -66,9 +79,20 @@ get_and_save <-
 
     # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?
     # A has a check for PDF in the save_names column - that's a good idea, but limits the use - could ask the user to specify?
-    # progressr::handlers(global = TRUE)
 
-    p <- progressr::progressor(steps = nrow(data))
+    if (dupe_strategy == "ignore") {
+      data <-
+        heapsofpapers::check_for_existence(data = data,
+                                           save_names = save_names,
+                                           dir = dir)
+      data <- data %>%
+        dplyr::filter(.data$got_this_already == 0) %>%
+        dplyr::select(-.data$save_names_full_path, -.data$got_this_already)
+    }
+
+    if (nrow(data) == 0) {
+      stop("There is nothing left to get. Possibly all the files already exist in the directory.")
+    }
 
     for (i in 1:nrow(data)) {
 

@@ -91,14 +91,16 @@ heapsofpapers::check_for_existence(data = two_pdfs,
 -   ~~If the directory doesn’t exist, ask if the user wants it to be
     created and if yes then create it.~~
 -   ~~some kind of progress indicator would be great in the console
-    messages (or an option to enable something like that). often, if i’m
+    messages (or an option to enable something like that). often, if I’m
     scraping hundreds of files, I want to know how far into it I am~~
 -   ~~for the delay “wiggling” (great call, I love that functionality in
     wget), may be worth varying it by an increment of the size of the
     delay. so if i set a second delay, I’d expect the wobble to be of
     maybe up to 20-25%? if it’s 5sec, that’d be up to a second wobble in
     either direction.~~
--   Update the functionality around dupes.
+-   ~~Make the behaviour more sophisticated when the file doesn’t
+    exist.~~
+-   ~~Update the functionality around dupes.~~
 -   Add example around how you can pipe to this e.g. pdfs %&gt;%
     get\_and\_save(…)
 -   Add message that estimates how long it’ll take and asking whether
@@ -107,7 +109,6 @@ heapsofpapers::check_for_existence(data = two_pdfs,
     is downloaded, by default.
 -   Add a check for any PDFs that are very small (which usually
     indicates there’s something wrong with them).
--   Make the behaviour more sophisticated when the file doesn’t exist.
 -   Add tests of whether the internet is on.
 -   Option to save to Dropbox.
 -   Add email notification for when it’s done.
@@ -124,7 +125,7 @@ that you need to download.
 ## Citation
 
 Please cite the package if you use it: Alexander, Rohan, and A Mahfouz,
-2021, ‘heapsofpapers: Easily get heaps of papers’, 4 April,
+2021, ‘heapsofpapers: Easily get heaps of papers’, 11 April,
 <https://github.com/RohanAlexander/heapsofpapers>.
 
 ## Thanks
