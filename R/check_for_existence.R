@@ -34,7 +34,7 @@
 #'}
 #' @importFrom rlang .data
 check_for_existence <-
-  function(data, save_names = "save_names", dir = "."){
+  function(data, save_names = "save_names", dir = getwd()){
 
     if (isFALSE(dir.exists(dir))){
       ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
@@ -51,7 +51,7 @@ check_for_existence <-
 
     data <-
       data %>%
-      dplyr::mutate(save_names_full_path = paste0(dir, "/",  data[[save_names]])) %>%
+      dplyr::mutate(save_names_full_path = file.path(dir, data[[save_names]])) %>%
       dplyr::mutate(got_this_already = dplyr::if_else(
         .data$save_names_full_path %in% already_got,
         1,

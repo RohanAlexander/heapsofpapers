@@ -97,7 +97,7 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
   file_to_check_does_download <- paste0(file.path(tempdir(), "competing_effects_on_the_average_age_of_infant_death.pdf"))
 
   check_downloaded <- file.exists(file_to_check_does_download)
-  # file.remove(file_to_check_does_download)
+  file.remove(file_to_check_does_download)
   expect_equal(check_downloaded, TRUE)
 
 }
@@ -170,7 +170,7 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
   file_to_check_did_download <- "cesr_an_r_package_for_the_canadian_election_study.pdf"
 
   check_downloaded <- file.exists(file_to_check_did_download)
-  file.remove(file_to_check_did_download)
+file.remove(file_to_check_did_download)
 
   expect_equal(check_downloaded, TRUE)
 
