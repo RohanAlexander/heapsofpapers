@@ -91,7 +91,10 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
     save_names = "save_here"
   )
 
-  file_to_check_does_download <- "competing_effects_on_the_average_age_of_infant_death.pdf"
+  file_to_check_does_download <- paste0(getwd(),
+                                        "/",
+                                        "competing_effects_on_the_average_age_of_infant_death.pdf"
+                                        )
 
   check_downloaded <- file.exists(file_to_check_does_download)
   file.remove(file_to_check_does_download)
