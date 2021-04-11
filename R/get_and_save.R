@@ -45,7 +45,7 @@
 #'}
 #' @importFrom rlang .data
 get_and_save <-
-  function(data, links = "links", save_names = "save_names", dir = ".", bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
+  function(data, links = "links", save_names = "save_names", dir = getwd(), bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
 
     if (isFALSE(curl::has_internet())) {
       stop("The function get_and_save() needs the internet, but isn't able to find a connection right now.")
