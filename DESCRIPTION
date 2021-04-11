@@ -27,7 +27,6 @@ Imports:
     dplyr,
     aws.s3,
     rlang,
-    here,
     mockr,
     curl,
     scales,
