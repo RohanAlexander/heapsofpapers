@@ -88,16 +88,16 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
   heapsofpapers::get_and_save(
     data = one_pdf,
     links = "locations_are",
-    save_names = "save_here"
+    save_names = "save_here",
+    dir = tempdir()
   )
 
-  file_to_check_does_download <- paste0(getwd(),
-                                        "/",
-                                        "competing_effects_on_the_average_age_of_infant_death.pdf"
-                                        )
+  local_tbl <-
+
+  file_to_check_does_download <- paste0(file.path(tempdir(), "competing_effects_on_the_average_age_of_infant_death.pdf"))
 
   check_downloaded <- file.exists(file_to_check_does_download)
-  file.remove(file_to_check_does_download)
+  # file.remove(file_to_check_does_download)
   expect_equal(check_downloaded, TRUE)
 
 }
