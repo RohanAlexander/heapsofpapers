@@ -29,7 +29,8 @@ Imports:
     rlang,
     mockr,
     curl,
-    scales
+    scales,
+    RCurl
 Suggests: 
     knitr,
     rmarkdown,

@@ -146,14 +146,18 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
                     "cesr_an_r_package_for_the_canadian_election_study.pdf")
     )
 
-  expect_warning(
-    heapsofpapers::get_and_save(
-      data = one_wrong_pdf,
-      links = "locations_are",
-      save_names = "save_here"
-    ),
-    "URL"
+  heapsofpapers::get_and_save(
+    data = one_wrong_pdf,
+    links = "locations_are",
+    save_names = "save_here"
   )
+
+  check_did_not_download <- file.exists("./should_error.pdf")
+  if (check_did_not_download == TRUE) {
+    file.remove("./should_error.pdf")
+  }
+
+  expect_equal(check_did_not_download, FALSE)
 
   check_downloaded <- file.exists("./cesr_an_r_package_for_the_canadian_election_study.pdf")
   file.remove("./cesr_an_r_package_for_the_canadian_election_study.pdf")

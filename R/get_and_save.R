@@ -102,8 +102,14 @@ get_and_save <-
         # if no bucket is specified, save to disk
         if (is.null(bucket)) {
           save_path <- file.path(dir, file_name)
-          tryCatch(utils::download.file(url, save_path, mode = "wb", quiet = FALSE),
-                   error = function(e) print(paste(url, 'Did not download')))
+
+          if(RCurl::url.exists(url)) {
+            tryCatch(utils::download.file(url, save_path, mode = "wb", quiet = TRUE),
+                     error = function(e) print(paste(url, 'Did not download')))
+          } else {
+            print(paste(url, 'Did not download'))
+          }
+
         } else {
           # check system environment for s3 credentials
           if (nchar(Sys.getenv("AWS_ACCESS_KEY_ID")) < 16) {
