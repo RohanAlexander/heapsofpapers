@@ -30,7 +30,8 @@ Imports:
     mockr,
     curl,
     scales,
-    RCurl
+    RCurl,
+    rprojroot
 Suggests: 
     knitr,
     rmarkdown,

@@ -45,7 +45,7 @@
 #'}
 #' @importFrom rlang .data
 get_and_save <-
-  function(data, links = "links", save_names = "save_names", dir = getwd(), bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
+  function(data, links = "links", save_names = "save_names", dir = ".", bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
 
     if (isFALSE(curl::has_internet())) {
       stop("The function get_and_save() needs the internet, but isn't able to find a connection right now.")
@@ -140,7 +140,7 @@ get_and_save <-
         if (got_file == TRUE) {
           message <- paste0("The file from ", url, " has been saved to ", save_path, " at ", Sys.time(), ". You're done with ", scales::percent(i / nrow(data)), ".")
         } else {
-          message <- paste0("The file from ", url, " was not saved at ", Sys.time(), ". You're done with ", scales::percent(i / nrow(data)), ".")
+          message <- paste0("The file from ", url, " was not saved at ", Sys.time(), ". It was meant to save to ", save_path,".  You're done with ", scales::percent(i / nrow(data)), ".")
         }
 
         if (i%%print_every == 0) {
