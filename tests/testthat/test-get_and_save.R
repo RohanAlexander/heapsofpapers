@@ -93,7 +93,7 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
 
   local_tbl <-
 
-  file_to_check_does_download <- paste0(file.path(rprojroot::find_root(rprojroot::is_testthat), "competing_effects_on_the_average_age_of_infant_death.pdf"))
+  file_to_check_does_download <- file.path("heaps_of", "competing_effects_on_the_average_age_of_infant_death.pdf")
 
   check_downloaded <- file.exists(file_to_check_does_download)
   file.remove(file_to_check_does_download)
@@ -161,7 +161,7 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
     save_names = "save_here"
   )
 
-  file_to_check_did_not_download <- "should_error.pdf"
+  file_to_check_did_not_download <- file.path("heaps_of", "should_error.pdf")
 
   check_did_not_download <- file.exists(file_to_check_did_not_download)
   if (check_did_not_download == TRUE) {
@@ -170,7 +170,7 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
 
   expect_equal(check_did_not_download, FALSE)
 
-  file_to_check_did_download <- "cesr_an_r_package_for_the_canadian_election_study.pdf"
+  file_to_check_did_download <- file.path("heaps_of", "cesr_an_r_package_for_the_canadian_election_study.pdf")
 
   check_downloaded <- file.exists(file_to_check_did_download)
 file.remove(file_to_check_did_download)

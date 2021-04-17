@@ -34,7 +34,7 @@
 #'}
 #' @importFrom rlang .data
 check_for_existence <-
-  function(data, save_names = "save_names", dir = "."){
+  function(data, save_names = "save_names", dir = "heaps_of"){
 
     if (isFALSE(dir.exists(dir))){
       ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")

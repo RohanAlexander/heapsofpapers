@@ -45,7 +45,7 @@
 #'}
 #' @importFrom rlang .data
 get_and_save <-
-  function(data, links = "links", save_names = "save_names", dir = ".", bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
+  function(data, links = "links", save_names = "save_names", dir = "heaps_of", bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
 
     if (isFALSE(curl::has_internet())) {
       stop("The function get_and_save() needs the internet, but isn't able to find a connection right now.")
@@ -101,6 +101,7 @@ get_and_save <-
 
         # if no bucket is specified, save to disk
         if (is.null(bucket)) {
+
           save_path <- file.path(dir, file_name)
 
           if(RCurl::url.exists(url)) {
