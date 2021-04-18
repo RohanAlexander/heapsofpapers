@@ -106,43 +106,43 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
 )
 
 
-test_that("get_and_save errors if you already have all the papers and dupe_strategy is 'ignore'", {
-
-  skip_if_offline()
-  skip_on_cran()
-
-  one_pdf <-
-    tibble::tibble(
-      locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
-      save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf")
-    )
-
-  heapsofpapers::get_and_save(
-    data = one_pdf,
-    links = "locations_are",
-    save_names = "save_here",
-    dir = "patricia"
-  )
-
-  expect_error(
-    heapsofpapers::get_and_save(
-      data = one_pdf,
-      links = "locations_are",
-      save_names = "save_here",
-      dir = "patricia",
-      dupe_strategy = "ignore"
-    ),
-    "There is nothing left to get. Possibly"
-  )
-
-  file_to_check_does_not_download_twice <- file.path("patricia", "competing_effects_on_the_average_age_of_infant_death.pdf")
-
-  file.remove(file_to_check_does_not_download_twice)
-
-  unlink("patricia", recursive = TRUE)
-
-}
-)
+# test_that("get_and_save errors if you already have all the papers and dupe_strategy is 'ignore'", {
+#
+#   skip_if_offline()
+#   skip_on_cran()
+#
+#   one_pdf <-
+#     tibble::tibble(
+#       locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
+#       save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf")
+#     )
+#
+#   heapsofpapers::get_and_save(
+#     data = one_pdf,
+#     links = "locations_are",
+#     save_names = "save_here",
+#     dir = "patricia"
+#   )
+#
+#   expect_error(
+#     heapsofpapers::get_and_save(
+#       data = one_pdf,
+#       links = "locations_are",
+#       save_names = "save_here",
+#       dir = "patricia",
+#       dupe_strategy = "ignore"
+#     ),
+#     "There is nothing left to get. Possibly"
+#   )
+#
+#   file_to_check_does_not_download_twice <- file.path("patricia", "competing_effects_on_the_average_age_of_infant_death.pdf")
+#
+#   file.remove(file_to_check_does_not_download_twice)
+#
+#   unlink("patricia", recursive = TRUE)
+#
+# }
+# )
 
 
 test_that("get_and_save ignores a PDF where the URL doesn't work but gets the other one.", {

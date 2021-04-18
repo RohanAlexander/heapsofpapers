@@ -59,15 +59,24 @@ get_and_save <-
       stop("The specified value to save_names is not a character.")
     }
 
-    if (isFALSE(dir.exists(dir))){
-      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+    # if (dir == "heaps_of" & ) {
+    #   dir.create("heaps_of")
+    #   dir <- normalizePath("heaps_of")
+    # } else {
+    #   dir <- normalizePath(dir)
+    # }
 
-      if (ask == TRUE){
-        dir.create(file.path(dir))
-      } else {
-        stop()
-        }
+    if (isFALSE(dir.exists(dir))){
+      # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+
+      # if (ask == TRUE){
+        dir.create(dir)
+      # } else {
+        # stop()
+        # }
     }
+
+    dir <- normalizePath(dir)
 
     if (delay < 1) {
       stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value that is at least 1.")
@@ -80,15 +89,15 @@ get_and_save <-
     # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?
     # A has a check for PDF in the save_names column - that's a good idea, but limits the use - could ask the user to specify?
 
-    if (dupe_strategy == "ignore") {
-      data <-
-        heapsofpapers::check_for_existence(data = data,
-                                           save_names = save_names,
-                                           dir = dir)
-      data <- data %>%
-        dplyr::filter(.data$got_this_already == 0) %>%
-        dplyr::select(-.data$save_names_full_path, -.data$got_this_already)
-    }
+    # if (dupe_strategy == "ignore") {
+    #   data <-
+    #     heapsofpapers::check_for_existence(data = data,
+    #                                        save_names = save_names,
+    #                                        dir = dir)
+    #   data <- data %>%
+    #     dplyr::filter(.data$got_this_already == 0) %>%
+    #     dplyr::select(-.data$save_names_full_path, -.data$got_this_already)
+    # }
 
     if (nrow(data) == 0) {
       stop("There is nothing left to get. Possibly all the files already exist in the directory.")
