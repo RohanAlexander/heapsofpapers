@@ -97,6 +97,8 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
   check_downloaded <- file.exists(file_to_check_does_download)
   file.remove(file_to_check_does_download)
 
+  unlink("heaps_of", recursive = TRUE)
+
   expect_equal(check_downloaded, TRUE)
 
 }
@@ -108,8 +110,6 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
   skip_if_offline()
   skip_on_cran()
 
-  dir_temp <- tempdir()
-
   one_pdf <-
     tibble::tibble(
       locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
@@ -120,7 +120,7 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
     data = one_pdf,
     links = "locations_are",
     save_names = "save_here",
-    dir = dir_temp
+    dir = "patricia"
   )
 
   expect_error(
@@ -128,15 +128,17 @@ test_that("get_and_save errors if you already have all the papers and dupe_strat
       data = one_pdf,
       links = "locations_are",
       save_names = "save_here",
-      dir = dir_temp,
+      dir = "patricia",
       dupe_strategy = "ignore"
     ),
     "There is nothing left to get. Possibly"
   )
 
-  file_to_check_does_not_download_twice <- file.path(dir_temp, "competing_effects_on_the_average_age_of_infant_death.pdf")
+  file_to_check_does_not_download_twice <- file.path("patricia", "competing_effects_on_the_average_age_of_infant_death.pdf")
 
   file.remove(file_to_check_does_not_download_twice)
+
+  unlink("patricia", recursive = TRUE)
 
 }
 )
@@ -173,7 +175,9 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
   file_to_check_did_download <- file.path("heaps_of", "cesr_an_r_package_for_the_canadian_election_study.pdf")
 
   check_downloaded <- file.exists(file_to_check_did_download)
-file.remove(file_to_check_did_download)
+  file.remove(file_to_check_did_download)
+
+  unlink("heaps_of", recursive = TRUE)
 
   expect_equal(check_downloaded, TRUE)
 

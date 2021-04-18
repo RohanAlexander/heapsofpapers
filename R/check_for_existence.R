@@ -36,7 +36,7 @@
 check_for_existence <-
   function(data, save_names = "save_names", dir = "heaps_of"){
 
-    if (isFALSE(dir.exists(dir))){
+    if (isFALSE(dir.exists(file.path(dir)))){
       ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
       if (ask == TRUE){
@@ -47,19 +47,28 @@ check_for_existence <-
     }
 
     # Check what's already been downloaded
-    already_got <- list.files(path = dir, full.names = TRUE)
+    already_got <-
+      list.files(path = file.path(dir),
+                              full.names = TRUE)
 
     data <-
       data %>%
       dplyr::mutate(save_names_full_path =
-                      file.path(dir, data[[save_names]])) %>%
+                      file.path(file.path(dir), data[[save_names]])) %>%
       dplyr::mutate(got_this_already = dplyr::if_else(
         .data$save_names_full_path %in% already_got,
         1,
         0)
       )
 
-    message <- paste0("You already have ", sum(data$got_this_already, na.rm = TRUE), " of these. Consider filtering before running `get_and_save()` or running `get_and_save()` with dupe_strategy = 'ignore'.")
+    already_got_this_number <- sum(data$got_this_already, na.rm = TRUE)
+
+    if (already_got_this_number == 0) {
+      message <- paste0("You don't have any of these.")
+    } else (
+      message <- paste0("You already have ", already_got_this_number, " of these. Consider filtering before running `get_and_save()` or running `get_and_save()` with dupe_strategy = 'ignore'.")
+    )
+
     print(message)
     return(data)
   }

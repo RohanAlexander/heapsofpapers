@@ -23,8 +23,6 @@ test_that("check_for_existence creates the directory if passed a directory that 
 
 test_that("check_for_existence identifies one file that already exists in directory", {
 
-  dir_temp <- tempdir()
-
   one_pdf <-
     tibble::tibble(
       locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
@@ -35,19 +33,21 @@ test_that("check_for_existence identifies one file that already exists in direct
   heapsofpapers::get_and_save(data = one_pdf,
                               links = "locations_are",
                               save_names = "save_here",
-                              dir = dir_temp
+                              dir = "helen"
                               )
 
   # Check that it exists
   check_data <-
     heapsofpapers::check_for_existence(data = one_pdf,
                                        save_names = "save_here",
-                                       dir = dir_temp
+                                       dir = "helen"
                                        )
 
   # Test if the entry in the updated dataset is one
   should_be_one <-
-    check_data$got_this_already[check_data$save_names_full_path == file.path(dir_temp, "competing_effects_on_the_average_age_of_infant_death.pdf")]
+    check_data$got_this_already[check_data$save_names_full_path == file.path("helen", "competing_effects_on_the_average_age_of_infant_death.pdf")]
+
+  unlink("helen", recursive = TRUE)
 
   expect_equal(should_be_one, 1)
 }
