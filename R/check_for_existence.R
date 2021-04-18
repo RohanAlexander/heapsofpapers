@@ -37,13 +37,13 @@ check_for_existence <-
   function(data, save_names = "save_names", dir = "heaps_of"){
 
     if (isFALSE(dir.exists(file.path(dir)))){
-      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
-
-      if (ask == TRUE){
+      # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+      #
+      # if (ask == TRUE){
         dir.create(file.path(dir))
-      } else {
-        stop()
-      }
+      # } else {
+      #   stop()
+      # }
     }
 
     # Check what's already been downloaded
