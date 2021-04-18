@@ -60,13 +60,13 @@ get_and_save <-
     }
 
     if (isFALSE(dir.exists(dir))){
-      # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
-      #
-      # if (ask == TRUE){
+      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+
+      if (ask == TRUE){
         dir.create(file.path(dir))
-      # } else {
-      #   stop()
-      #   }
+      } else {
+        stop()
+        }
     }
 
     if (delay < 1) {
@@ -105,7 +105,7 @@ get_and_save <-
           save_path <- file.path(dir, file_name)
 
           if(RCurl::url.exists(url)) {
-            tryCatch(utils::download.file(url, save_path, mode = "wb", quiet = TRUE),
+            tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
                      error = function(e) print(paste(url, 'Did not download')))
           } else {
             print(paste(url, 'Did not download'))
