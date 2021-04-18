@@ -45,7 +45,7 @@ test_that("check_for_existence identifies one file that already exists in direct
 
   # Test if the entry in the updated dataset is one
   should_be_one <-
-    check_data$got_this_already[check_data$save_names_full_path == file.path("helen", "competing_effects_on_the_average_age_of_infant_death.pdf")]
+    check_data$got_this_already[check_data$save_names_full_path == normalizePath(file.path("helen", "competing_effects_on_the_average_age_of_infant_death.pdf"))]
 
   unlink("helen", recursive = TRUE)
 
@@ -77,7 +77,7 @@ test_that("check_for_existence identifies a file that already exists in a specif
 
   # Test if the entry in the updated dataset is one
   should_be_one <-
-    check_data$got_this_already[check_data$save_names_full_path == "put_it_here/cesr_an_r_package_for_the_canadian_election_study.pdf"]
+    check_data$got_this_already[check_data$save_names_full_path == normalizePath(file.path("put_it_here", "cesr_an_r_package_for_the_canadian_election_study.pdf"))]
 
   unlink("put_it_here", recursive = TRUE)
 

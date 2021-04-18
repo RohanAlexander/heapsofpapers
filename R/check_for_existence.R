@@ -29,37 +29,39 @@
 #' save_names = "save_here"
 #' )
 #'
-#' heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
+#' test <- heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
 
 #'}
 #' @importFrom rlang .data
 check_for_existence <-
   function(data, save_names = "save_names", dir = "heaps_of"){
 
-    if (isFALSE(dir.exists(file.path(dir)))){
-      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+    if (isFALSE(dir.exists(dir))){
+      # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
-      if (ask == TRUE){
-        dir.create(file.path(dir))
-      } else {
-        stop()
-      }
+      # if (ask == TRUE){
+      dir.create(dir)
+      # } else {
+      # stop()
+      # }
     }
+
+    dir <- normalizePath(dir)
 
     # Check what's already been downloaded
     already_got <-
-      list.files(path = file.path(dir),
-                              full.names = TRUE)
+      list.files(path = dir, full.names = TRUE)
 
     data <-
       data %>%
       dplyr::mutate(save_names_full_path =
-                      file.path(file.path(dir), data[[save_names]])) %>%
-      dplyr::mutate(got_this_already = dplyr::if_else(
-        .data$save_names_full_path %in% already_got,
-        1,
-        0)
-      )
+                      file.path(dir, .data[[save_names]])) %>%
+      dplyr::mutate(got_this_already =
+                      dplyr::if_else(
+                        .data$save_names_full_path %in% already_got,
+                        1,
+                        0)
+                    )
 
     already_got_this_number <- sum(data$got_this_already, na.rm = TRUE)
 
@@ -72,3 +74,7 @@ check_for_existence <-
     print(message)
     return(data)
   }
+
+
+
+

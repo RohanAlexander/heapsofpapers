@@ -35,6 +35,6 @@ links = "locations_are",
 save_names = "save_here"
 )
 
-heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
+test <- heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
 }
 }
