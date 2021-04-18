@@ -63,7 +63,7 @@ get_and_save <-
       ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
       if (ask == TRUE){
-        dir.create(dir)
+        dir.create(file.path(dir))
       } else {
         stop()
         }

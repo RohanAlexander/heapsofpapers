@@ -8,7 +8,7 @@ get_and_save(
   data,
   links = "links",
   save_names = "save_names",
-  dir = ".",
+  dir = "heaps_of",
   bucket = NULL,
   delay = 5,
   print_every = 1,

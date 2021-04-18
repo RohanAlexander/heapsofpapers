@@ -40,7 +40,7 @@ check_for_existence <-
       ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
       if (ask == TRUE){
-        dir.create(dir)
+        dir.create(file.path(dir))
       } else {
         stop()
       }

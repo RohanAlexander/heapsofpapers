@@ -4,7 +4,7 @@
 \alias{check_for_existence}
 \title{check_for_existence}
 \usage{
-check_for_existence(data, save_names = "save_names", dir = ".")
+check_for_existence(data, save_names = "save_names", dir = "heaps_of")
 }
 \arguments{
 \item{data}{A dataframe that contains URLs that you want to download and the names
