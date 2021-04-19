@@ -76,8 +76,6 @@ get_and_save <-
         # }
     }
 
-    # dir <- fs::path_norm(dir)
-
     if (delay < 1) {
       stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value that is at least 1.")
     }
@@ -111,7 +109,7 @@ get_and_save <-
         # if no bucket is specified, save to disk
         if (is.null(bucket)) {
 
-          save_path <- fs::path(dir, file_name)
+          save_path <- fs::path(fs::path_real(dir), file_name)
 
           if(RCurl::url.exists(url)) {
             tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
