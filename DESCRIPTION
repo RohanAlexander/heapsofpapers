@@ -31,7 +31,8 @@ Imports:
     curl,
     scales,
     RCurl,
-    rprojroot
+    rprojroot,
+    fs
 Suggests: 
     knitr,
     rmarkdown,

@@ -66,17 +66,17 @@ get_and_save <-
     #   dir <- normalizePath(dir)
     # }
 
-    if (isFALSE(dir.exists(dir))){
+    if (isFALSE(fs::dir_exists(dir))){
       # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
       # if (ask == TRUE){
-        dir.create(dir)
+        fs::dir_create(dir)
       # } else {
         # stop()
         # }
     }
 
-    dir <- normalizePath(dir)
+    # dir <- fs::path_norm(dir)
 
     if (delay < 1) {
       stop("Please consider waiting longer between calls to the server by leaving 'delay' blank (defaults to 5 seconds) or specifying a value that is at least 1.")
@@ -111,7 +111,7 @@ get_and_save <-
         # if no bucket is specified, save to disk
         if (is.null(bucket)) {
 
-          save_path <- file.path(dir, file_name)
+          save_path <- fs::path(dir, file_name)
 
           if(RCurl::url.exists(url)) {
             tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
@@ -146,7 +146,7 @@ get_and_save <-
 
         # Let the user know where it's up to
         # Check if the file downloaded:
-        got_file <- file.exists(save_path)
+        got_file <- fs::file_exists(save_path)
         if (got_file == TRUE) {
           message <- paste0("The file from ", url, " has been saved to ", save_path, " at ", Sys.time(), ". You're done with ", scales::percent(i / nrow(data)), ".")
         } else {

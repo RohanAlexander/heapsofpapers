@@ -36,26 +36,26 @@
 check_for_existence <-
   function(data, save_names = "save_names", dir = "heaps_of"){
 
-    if (isFALSE(dir.exists(dir))){
+    if (isFALSE(fs::dir_exists(dir))){
       # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
       # if (ask == TRUE){
-      dir.create(dir)
+      fs::dir_create(dir)
       # } else {
       # stop()
       # }
     }
 
-    dir <- normalizePath(dir)
+    # dir <- fs::path_norm(dir)
 
     # Check what's already been downloaded
     already_got <-
-      list.files(path = dir, full.names = TRUE)
+      fs::dir_ls(path = dir, recurse = TRUE)
 
     data <-
       data %>%
       dplyr::mutate(save_names_full_path =
-                      file.path(dir, .data[[save_names]])) %>%
+                      fs::path(dir, .data[[save_names]])) %>%
       dplyr::mutate(got_this_already =
                       dplyr::if_else(
                         .data$save_names_full_path %in% already_got,

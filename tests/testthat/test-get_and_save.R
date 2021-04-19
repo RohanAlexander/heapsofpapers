@@ -12,11 +12,11 @@ test_that("get_and_save creates the directory if it doesn't exist", {
                               save_names = "save_here",
                               dir = "baby_beluga_in_the_deep_blue_sea")
 
-  does_it_exist <- dir.exists("baby_beluga_in_the_deep_blue_sea")
+  does_it_exist <- fs::dir_exists("baby_beluga_in_the_deep_blue_sea")
 
-  unlink("baby_beluga_in_the_deep_blue_sea", recursive = TRUE)
+  fs::dir_delete("baby_beluga_in_the_deep_blue_sea")
 
-  expect_equal(does_it_exist, TRUE)
+  expect_true(does_it_exist)
   }
   )
 
@@ -93,14 +93,13 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
   )
 
   file_to_check_does_download <-
-    file.path("heaps_of", "competing_effects_on_the_average_age_of_infant_death.pdf")
+    fs::path("heaps_of", "competing_effects_on_the_average_age_of_infant_death.pdf")
 
-  check_downloaded <- file.exists(file_to_check_does_download)
-  file.remove(file_to_check_does_download)
+  check_downloaded <- fs::file_exists(file_to_check_does_download)
 
-  unlink("heaps_of", recursive = TRUE)
+  fs::dir_delete("heaps_of")
 
-  expect_equal(check_downloaded, TRUE)
+  expect_true(check_downloaded)
 
 }
 )
@@ -135,11 +134,11 @@ test_that("get_and_save downloads a paper if the circumstances are correct", {
 #     "There is nothing left to get. Possibly"
 #   )
 #
-#   file_to_check_does_not_download_twice <- file.path("patricia", "competing_effects_on_the_average_age_of_infant_death.pdf")
+#   file_to_check_does_not_download_twice <- fs::path("patricia", "competing_effects_on_the_average_age_of_infant_death.pdf")
 #
-#   file.remove(file_to_check_does_not_download_twice)
+#   fs::file_delete((file_to_check_does_not_download_twice)
 #
-#   unlink("patricia", recursive = TRUE)
+#   fs::dir_delete("patricia")
 #
 # }
 # )
@@ -164,23 +163,23 @@ test_that("get_and_save ignores a PDF where the URL doesn't work but gets the ot
     save_names = "save_here"
   )
 
-  file_to_check_did_not_download <- file.path("heaps_of", "should_error.pdf")
+  file_to_check_did_not_download <- fs::path("heaps_of", "should_error.pdf")
 
-  check_did_not_download <- file.exists(file_to_check_did_not_download)
+  check_did_not_download <- fs::file_exists(file_to_check_did_not_download)
   if (check_did_not_download == TRUE) {
-    file.remove(file_to_check_did_not_download)
+    fs::file_delete(file_to_check_did_not_download)
   }
 
-  expect_equal(check_did_not_download, FALSE)
+  expect_false(check_did_not_download)
 
-  file_to_check_did_download <- file.path("heaps_of", "cesr_an_r_package_for_the_canadian_election_study.pdf")
+  file_to_check_did_download <- fs::path("heaps_of", "cesr_an_r_package_for_the_canadian_election_study.pdf")
 
-  check_downloaded <- file.exists(file_to_check_did_download)
-  file.remove(file_to_check_did_download)
+  check_downloaded <- fs::file_exists(file_to_check_did_download)
+  fs::file_delete(file_to_check_did_download)
 
-  unlink("heaps_of", recursive = TRUE)
+  fs::dir_delete("heaps_of")
 
-  expect_equal(check_downloaded, TRUE)
+  expect_true(check_downloaded, TRUE)
 
 }
 )

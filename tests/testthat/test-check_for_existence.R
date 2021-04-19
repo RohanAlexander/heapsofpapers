@@ -12,11 +12,11 @@ test_that("check_for_existence creates the directory if passed a directory that 
                                      save_names = "save_here",
                                      dir = "baby_beluga_in_the_deep_blue_sea")
 
-  does_it_exist <- dir.exists("baby_beluga_in_the_deep_blue_sea")
+  does_it_exist <- fs::dir_exists("baby_beluga_in_the_deep_blue_sea")
 
-  unlink("baby_beluga_in_the_deep_blue_sea", recursive = TRUE)
+  fs::dir_delete("baby_beluga_in_the_deep_blue_sea")
 
-  expect_equal(does_it_exist, TRUE)
+  expect_true(does_it_exist)
   }
   )
 
@@ -45,9 +45,9 @@ test_that("check_for_existence identifies one file that already exists in direct
 
   # Test if the entry in the updated dataset is one
   should_be_one <-
-    check_data$got_this_already[check_data$save_names_full_path == normalizePath(file.path("helen", "competing_effects_on_the_average_age_of_infant_death.pdf"))]
+    check_data$got_this_already[check_data$save_names_full_path == fs::path("helen", "competing_effects_on_the_average_age_of_infant_death.pdf")]
 
-  unlink("helen", recursive = TRUE)
+  fs::dir_delete("helen")
 
   expect_equal(should_be_one, 1)
 }
@@ -77,9 +77,9 @@ test_that("check_for_existence identifies a file that already exists in a specif
 
   # Test if the entry in the updated dataset is one
   should_be_one <-
-    check_data$got_this_already[check_data$save_names_full_path == normalizePath(file.path("put_it_here", "cesr_an_r_package_for_the_canadian_election_study.pdf"))]
+    check_data$got_this_already[check_data$save_names_full_path == fs::path("put_it_here", "cesr_an_r_package_for_the_canadian_election_study.pdf")]
 
-  unlink("put_it_here", recursive = TRUE)
+  fs::dir_delete("put_it_here")
 
   expect_equal(should_be_one, 1)
 }
