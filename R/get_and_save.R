@@ -111,12 +111,12 @@ get_and_save <-
 
           save_path <- fs::path(fs::path_real(dir), file_name)
 
-          if(RCurl::url.exists(url)) {
+          # if(RCurl::url.exists(url)) {
             tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
                      error = function(e) print(paste(url, 'Did not download')))
-          } else {
-            print(paste(url, 'Did not download'))
-          }
+          # } else {
+          #   print(paste(url, 'Did not download'))
+          # }
 
         } else {
           # check system environment for s3 credentials
