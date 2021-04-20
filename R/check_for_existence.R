@@ -29,7 +29,7 @@
 #' save_names = "save_here"
 #' )
 #'
-#' test <- heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
+#' heapsofpapers::check_for_existence(data = two_pdfs, save_names = "save_here")
 
 #'}
 #' @importFrom rlang .data
@@ -37,16 +37,13 @@ check_for_existence <-
   function(data, save_names = "save_names", dir = "heaps_of"){
 
     if (isFALSE(fs::dir_exists(dir))){
-      # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
-
-      # if (ask == TRUE){
-      fs::dir_create(dir)
-      # } else {
-      # stop()
-      # }
-    }
-
-    # dir <- fs::path_norm(dir)
+      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+      if (ask == TRUE){
+        fs::dir_create(dir)
+        } else {
+          stop()
+        }
+      }
 
     # Check what's already been downloaded
     already_got <-
@@ -74,7 +71,3 @@ check_for_existence <-
     print(message)
     return(data)
   }
-
-
-
-

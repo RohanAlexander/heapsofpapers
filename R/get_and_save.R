@@ -67,13 +67,13 @@ get_and_save <-
     # }
 
     if (isFALSE(fs::dir_exists(dir))){
-      # ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
+      ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
-      # if (ask == TRUE){
+      if (ask == TRUE){
         fs::dir_create(dir)
-      # } else {
-        # stop()
-        # }
+      } else {
+      stop()
+      }
     }
 
     if (delay < 1) {
@@ -87,15 +87,15 @@ get_and_save <-
     # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?
     # A has a check for PDF in the save_names column - that's a good idea, but limits the use - could ask the user to specify?
 
-    # if (dupe_strategy == "ignore") {
-    #   data <-
-    #     heapsofpapers::check_for_existence(data = data,
-    #                                        save_names = save_names,
-    #                                        dir = dir)
-    #   data <- data %>%
-    #     dplyr::filter(.data$got_this_already == 0) %>%
-    #     dplyr::select(-.data$save_names_full_path, -.data$got_this_already)
-    # }
+    if (dupe_strategy == "ignore") {
+      data <-
+        heapsofpapers::check_for_existence(data = data,
+                                           save_names = save_names,
+                                           dir = dir)
+      data <- data %>%
+        dplyr::filter(.data$got_this_already == 0) %>%
+        dplyr::select(-.data$save_names_full_path, -.data$got_this_already)
+    }
 
     if (nrow(data) == 0) {
       stop("There is nothing left to get. Possibly all the files already exist in the directory.")
@@ -111,9 +111,11 @@ get_and_save <-
 
           save_path <- fs::path(fs::path_real(dir), file_name)
 
-          # if(RCurl::url.exists(url)) {
+          # if(!httr::http_error(url)) {
             tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
-                     error = function(e) print(paste(url, 'Did not download')))
+                     error = function(e) print(paste(url, 'Did not download'))) %>%
+            suppressWarnings()
+
           # } else {
           #   print(paste(url, 'Did not download'))
           # }
