@@ -11,9 +11,10 @@ Authors@R: c(
            family = "Mahfouz",
            role = c("aut"))
            )
-Description: Makes it really easy to download a large number of files such as PDFs, CSVs and others.
+Description: Makes it easy to download a large number of files such as PDFs, CSVs and others.
 License: MIT + file LICENSE
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://github.com/RohanAlexander/heapsofpapers
