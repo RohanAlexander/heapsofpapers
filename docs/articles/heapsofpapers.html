@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heapsofpapers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -108,13 +108,99 @@
 
     
     
+<div id="default-usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#default-usage" class="anchor"></a>Default usage</h2>
+<p>Load the package with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RohanAlexander/heapsofpapers">heapsofpapers</a></span><span class="op">)</span></code></pre></div>
+<p>Essentially what you need in order to use <code>heapsofpapers</code> is a dataframe that contains two variables: 1) the addresses that you want to download, and 2) the names that you want to give them locally. To get started we’re going to construct that for just two pdfs that are hosted on SocArXiv.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">two_pdfs</span> <span class="op">&lt;-</span>
+  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+    locations_are <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"https://osf.io/preprints/socarxiv/z4qg9/download"</span>,
+                      <span class="st">"https://osf.io/preprints/socarxiv/a29h8/download"</span><span class="op">)</span>,
+    save_here <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"competing_effects_on_the_average_age_of_infant_death.pdf"</span>,
+                  <span class="st">"cesr_an_r_package_for_the_canadian_election_study.pdf"</span><span class="op">)</span>
+    <span class="op">)</span></code></pre></div>
+<p>At this point we can use the main function <code><a href="../reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> to go and get those two PDFs. By default the PDFs will be saved into a folder called ‘heaps_of’.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">two_pdfs</span>,
+  links <span class="op">=</span> <span class="st">"locations_are"</span>,
+  save_names <span class="op">=</span> <span class="st">"save_here"</span>
+<span class="op">)</span></code></pre></div>
+</div>
+<div id="specify-a-folder" class="section level2">
+<h2 class="hasAnchor">
+<a href="#specify-a-folder" class="anchor"></a>Specify a folder</h2>
+<p>By default, the papers are downloaded into a folder called ‘heaps_of’. You could also specify the directory, for instance, if you would prefer a folder called ‘inputs’. Regardless, if the folder doesn’t exist then you’ll be asked whether you want to create it.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">two_pdfs</span>,
+  links <span class="op">=</span> <span class="st">"locations_are"</span>,
+  save_names <span class="op">=</span> <span class="st">"save_here"</span>,
+  dir <span class="op">=</span> <span class="st">"inputs"</span>
+<span class="op">)</span></code></pre></div>
+</div>
+<div id="consider-duplicates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#consider-duplicates" class="anchor"></a>Consider duplicates</h2>
+<p>Let’s say that you had already downloaded some PDFs, but weren’t sure and didn’t want to download them again. You could use <code><a href="../reference/check_for_existence.html">heapsofpapers::check_for_existence()</a></code> to check.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/check_for_existence.html">check_for_existence</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">two_pdfs</span>, 
+                                   save_names <span class="op">=</span> <span class="st">"save_here"</span><span class="op">)</span></code></pre></div>
+<p>If you already have some of the files then <code><a href="../reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> allows you to ignore those files, and not download them again, by specifying that <code>dupe_strategy = "ignore"</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">two_pdfs</span>,
+  links <span class="op">=</span> <span class="st">"locations_are"</span>,
+  save_names <span class="op">=</span> <span class="st">"save_here"</span>,
+  dupe_strategy <span class="op">=</span> <span class="st">"ignore"</span>
+<span class="op">)</span></code></pre></div>
+</div>
+<div id="change-the-delay" class="section level2">
+<h2 class="hasAnchor">
+<a href="#change-the-delay" class="anchor"></a>Change the delay</h2>
+<p>By default <code><a href="../reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> waits five seconds between each attempt to get a PDF. You can change this by specifying an integer that is at least one. The function will then wait that many seconds. It’s not possible to set a delay of zero.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">two_pdfs</span>,
+  links <span class="op">=</span> <span class="st">"locations_are"</span>,
+  save_names <span class="op">=</span> <span class="st">"save_here"</span>,
+  delay <span class="op">=</span> <span class="fl">2</span>,
+<span class="op">)</span></code></pre></div>
+</div>
+<div id="change-the-print-strategy" class="section level2">
+<h2 class="hasAnchor">
+<a href="#change-the-print-strategy" class="anchor"></a>Change the print strategy</h2>
+<p>By default <code><a href="../reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> will print every time it finishes with a row in your dataframe. But you can change that behaviour by specifying how often you would like it to print. For instance to print at every second row, specify an integer 2, to print every tenth, specify 10.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">two_pdfs</span>,
+  links <span class="op">=</span> <span class="st">"locations_are"</span>,
+  save_names <span class="op">=</span> <span class="st">"save_here"</span>,
+  print_every <span class="op">=</span> <span class="fl">2</span>
+<span class="op">)</span></code></pre></div>
+</div>
+<div id="piping" class="section level2">
+<h2 class="hasAnchor">
+<a href="#piping" class="anchor"></a>Piping</h2>
+<p>Rather than specify the data, it is possible to pipe a dataset to <code><a href="../reference/get_and_save.html">heapsofpapers::get_and_save()</a></code>:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">two_pdfs</span> <span class="op">%&gt;%</span> 
+  <span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="../reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+    links <span class="op">=</span> <span class="st">"locations_are"</span>,
+    save_names <span class="op">=</span> <span class="st">"save_here"</span>
+    <span class="op">)</span></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

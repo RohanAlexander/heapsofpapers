@@ -8,19 +8,20 @@
 [![R-CMD-check](https://github.com/RohanAlexander/heapsofpapers/workflows/R-CMD-check/badge.svg)](https://github.com/RohanAlexander/heapsofpapers/actions)
 <!-- badges: end -->
 
-The goal of `heapsofpapers` is to make it really easy to respectfully
-get, well, heaps of papers (and CSVs and websites). For instance, you
-may want to understand the state of open code and open data across a
-bunch of different pre-print repositories, e.g. Collins and Alexander,
-2021, and in that case you need a way to quickly download thousands of
-PDFs.
+The goal of `heapsofpapers` is to make it easy to respectfully get,
+well, heaps of papers (and CSVs, and websites, and similar). For
+instance, you may want to understand the state of open code and open
+data across a bunch of different pre-print repositories, e.g. Collins
+and Alexander, 2021, and in that case you need a way to quickly download
+thousands of PDFs.
 
 Essentially, the main function in the package,
 `heapsofpapers::get_and_save()` is a wrapper around a `for` loop and
-`utils::download.file`, but there are a bunch of small things that make
-it handy to use instead of rolling your own each time. For instance, the
-package automatically slows down your requests, lets you know where it
-is up to, and adjusts for papers that you’ve already downloaded.
+`utils::download.file()`, but there are a bunch of small things that
+make it handy to use instead of rolling your own each time. For
+instance, the package automatically slows down your requests, lets you
+know where it is up to, and adjusts for papers that you’ve already
+downloaded.
 
 ## Installation
 
@@ -33,7 +34,8 @@ devtools::install_github("RohanAlexander/heapsofpapers")
 
 ## Example
 
-Here is an example of getting two papers from SocArXiv:
+Here is an example of getting two papers from SocArXiv, using the main
+function `heapsofpapers::get_and_save()`:
 
 ``` r
 library(heapsofpapers)
@@ -52,25 +54,40 @@ heapsofpapers::get_and_save(
 )
 ```
 
-You could also specify the directory, for instance, if you have a folder
-called ‘inputs’.
+By default, the papers are downloaded into a folder called ‘heaps\_of’.
+You could also specify the directory, for instance, if you would prefer
+a folder called ‘inputs’. Regardless, if the folder doesn’t exist then
+you’ll be asked whether you want to create it.
 
 ``` r
 heapsofpapers::get_and_save(
   data = two_pdfs,
   links = "locations_are",
   save_names = "save_here",
-  dir = "./inputs"
+  dir = "inputs"
 )
 ```
 
 Let’s say that you had already downloaded some PDFs, but weren’t sure
 and didn’t want to download them again. You could use
-`check_for_existence` to check.
+`heapsofpapers::check_for_existence()` to check.
 
 ``` r
 heapsofpapers::check_for_existence(data = two_pdfs, 
                                    save_names = "save_here")
+```
+
+If you already have some of the files then
+`heapsofpapers::get_and_save()` allows you to ignore those files, and
+not download them again, by specifying that `dupe_strategy = "ignore"`.
+
+``` r
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  dupe_strategy = "ignore"
+)
 ```
 
 ## Roadmap
@@ -101,10 +118,11 @@ heapsofpapers::check_for_existence(data = two_pdfs,
 -   ~~Make the behaviour more sophisticated when the file doesn’t
     exist.~~
 -   ~~Update the functionality around dupes.~~
--   Add example around how you can pipe to this e.g. pdfs %&gt;%
-    get\_and\_save(…)
+-   ~~Add example around how you can pipe to this e.g. pdfs %&gt;%
+    get\_and\_save(…)~~
 -   Add message that estimates how long it’ll take and asking whether
     the user would like to proceed.
+-   Check and develop the s3 behaviour.
 -   Make the length of the pause dependent on the size of the file that
     is downloaded, by default.
 -   Add a check for any PDFs that are very small (which usually
@@ -125,10 +143,11 @@ that you need to download.
 ## Citation
 
 Please cite the package if you use it: Alexander, Rohan, and A Mahfouz,
-2021, ‘heapsofpapers: Easily get heaps of papers’, 11 April,
+2021, ‘heapsofpapers: Easily get heaps of papers’, 24 April,
 <https://github.com/RohanAlexander/heapsofpapers>.
 
 ## Thanks
 
-We thank Alex Luscombe, Amy Farrow, Edward Morgan, Monica Howlett,
-Thomas William Rosenthal, and Tom Cardoso for their advice.
+We thank Alex Luscombe, Amy Farrow, Edward Morgan, Monica Alexander,
+Paul A. Hodgetts, Sharla Gelfand, Thomas William Rosenthal, and Tom
+Cardoso for their help.

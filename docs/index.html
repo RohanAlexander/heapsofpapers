@@ -5,20 +5,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Easily Download Heaps of PDFs, CSVs, or whatever else you can list • heapsofpapers</title>
+<title>Easily Download Heaps of PDFs, CSVs, or Whatever Else you can List • heapsofpapers</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Easily Download Heaps of PDFs, CSVs, or whatever else you can list">
-<meta property="og:description" content="This package makes it really easy to download a large number of files such as PDFs, CSVs and others.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Easily Download Heaps of PDFs, CSVs, or Whatever Else you can List">
+<meta property="og:description" content="Makes it really easy to download a large number of files such as PDFs, CSVs and others.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">heapsofpapers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -103,8 +103,8 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of <code>heapsofpapers</code> is to make it really easy to respectfully get, well, heaps of papers (and CSVs and websites). For instance, you may want to understand the state of open code and open data across a bunch of different pre-print repositories, e.g. Collins and Alexander, 2021, and in that case you need a way to quickly download thousands of PDFs.</p>
-<p>Essentially, the main function in the package, <code><a href="reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> is a wrapper around a <code>for</code> loop and <code><a href="https://rdrr.io/r/utils/download.file.html">utils::download.file</a></code>, but there are a bunch of small things that make it handy to use instead of rolling your own each time. For instance, the package automatically slows down your requests, lets you know where it is up to, and adjusts for papers that you’ve already downloaded.</p>
+<p>The goal of <code>heapsofpapers</code> is to make it easy to respectfully get, well, heaps of papers (and CSVs, and websites, and similar). For instance, you may want to understand the state of open code and open data across a bunch of different pre-print repositories, e.g. Collins and Alexander, 2021, and in that case you need a way to quickly download thousands of PDFs.</p>
+<p>Essentially, the main function in the package, <code><a href="reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> is a wrapper around a <code>for</code> loop and <code><a href="https://rdrr.io/r/utils/download.file.html">utils::download.file()</a></code>, but there are a bunch of small things that make it handy to use instead of rolling your own each time. For instance, the package automatically slows down your requests, lets you know where it is up to, and adjusts for papers that you’ve already downloaded.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -116,7 +116,7 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>Here is an example of getting two papers from SocArXiv:</p>
+<p>Here is an example of getting two papers from SocArXiv, using the main function <code><a href="reference/get_and_save.html">heapsofpapers::get_and_save()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RohanAlexander/heapsofpapers">heapsofpapers</a></span><span class="op">)</span>
 <span class="va">two_pdfs</span> <span class="op">&lt;-</span>
@@ -132,18 +132,26 @@
   links <span class="op">=</span> <span class="st">"locations_are"</span>,
   save_names <span class="op">=</span> <span class="st">"save_here"</span>
 <span class="op">)</span></code></pre></div>
-<p>You could also specify the directory, for instance, if you have a folder called ‘inputs’.</p>
+<p>By default, the papers are downloaded into a folder called ‘heaps_of’. You could also specify the directory, for instance, if you would prefer a folder called ‘inputs’. Regardless, if the folder doesn’t exist then you’ll be asked whether you want to create it.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
   data <span class="op">=</span> <span class="va">two_pdfs</span>,
   links <span class="op">=</span> <span class="st">"locations_are"</span>,
   save_names <span class="op">=</span> <span class="st">"save_here"</span>,
-  dir <span class="op">=</span> <span class="st">"./inputs"</span>
+  dir <span class="op">=</span> <span class="st">"inputs"</span>
 <span class="op">)</span></code></pre></div>
-<p>Let’s say that you had already downloaded some PDFs, but weren’t sure and didn’t want to download them again. You could use <code>check_for_existence</code> to check.</p>
+<p>Let’s say that you had already downloaded some PDFs, but weren’t sure and didn’t want to download them again. You could use <code><a href="reference/check_for_existence.html">heapsofpapers::check_for_existence()</a></code> to check.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="reference/check_for_existence.html">check_for_existence</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">two_pdfs</span>, 
                                    save_names <span class="op">=</span> <span class="st">"save_here"</span><span class="op">)</span></code></pre></div>
+<p>If you already have some of the files then <code><a href="reference/get_and_save.html">heapsofpapers::get_and_save()</a></code> allows you to ignore those files, and not download them again, by specifying that <code>dupe_strategy = "ignore"</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">heapsofpapers</span><span class="fu">::</span><span class="fu"><a href="reference/get_and_save.html">get_and_save</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">two_pdfs</span>,
+  links <span class="op">=</span> <span class="st">"locations_are"</span>,
+  save_names <span class="op">=</span> <span class="st">"save_here"</span>,
+  dupe_strategy <span class="op">=</span> <span class="st">"ignore"</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="roadmap" class="section level2">
 <h2 class="hasAnchor">
@@ -164,8 +172,9 @@
 <li><del>for the delay “wiggling” (great call, I love that functionality in wget), may be worth varying it by an increment of the size of the delay. so if i set a second delay, I’d expect the wobble to be of maybe up to 20-25%? if it’s 5sec, that’d be up to a second wobble in either direction.</del></li>
 <li><del>Make the behaviour more sophisticated when the file doesn’t exist.</del></li>
 <li><del>Update the functionality around dupes.</del></li>
-<li>Add example around how you can pipe to this e.g. pdfs %&gt;% get_and_save(…)</li>
+<li><del>Add example around how you can pipe to this e.g. pdfs %&gt;% get_and_save(…)</del></li>
 <li>Add message that estimates how long it’ll take and asking whether the user would like to proceed.</li>
+<li>Check and develop the s3 behaviour.</li>
 <li>Make the length of the pause dependent on the size of the file that is downloaded, by default.</li>
 <li>Add a check for any PDFs that are very small (which usually indicates there’s something wrong with them).</li>
 <li>Add tests of whether the internet is on.</li>
@@ -181,12 +190,12 @@
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
-<p>Please cite the package if you use it: Alexander, Rohan, and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’, 11 April, <a href="https://github.com/RohanAlexander/heapsofpapers" class="uri">https://github.com/RohanAlexander/heapsofpapers</a>.</p>
+<p>Please cite the package if you use it: Alexander, Rohan, and A Mahfouz, 2021, ‘heapsofpapers: Easily get heaps of papers’, 24 April, <a href="https://github.com/RohanAlexander/heapsofpapers" class="uri">https://github.com/RohanAlexander/heapsofpapers</a>.</p>
 </div>
 <div id="thanks" class="section level2">
 <h2 class="hasAnchor">
 <a href="#thanks" class="anchor"></a>Thanks</h2>
-<p>We thank Alex Luscombe, Amy Farrow, Edward Morgan, Monica Howlett, Thomas William Rosenthal, and Tom Cardoso for their advice.</p>
+<p>We thank Alex Luscombe, Amy Farrow, Edward Morgan, Monica Alexander, Paul A. Hodgetts, Sharla Gelfand, Thomas William Rosenthal, and Tom Cardoso for their help.</p>
 </div>
 </div>
   </div>

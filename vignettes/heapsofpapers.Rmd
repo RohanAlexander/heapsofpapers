@@ -14,6 +14,111 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+
+
+## Default usage
+
+Load the package with:
+
 ```{r setup}
 library(heapsofpapers)
 ```
+
+Essentially what you need in order to use `heapsofpapers` is a dataframe that contains two variables: 1) the addresses that you want to download, and 2) the names that you want to give them locally. To get started we're going to construct that for just two pdfs that are hosted on SocArXiv.
+
+```{r makedataset, eval = FALSE}
+two_pdfs <-
+  tibble::tibble(
+    locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download",
+                      "https://osf.io/preprints/socarxiv/a29h8/download"),
+    save_here = c("competing_effects_on_the_average_age_of_infant_death.pdf",
+                  "cesr_an_r_package_for_the_canadian_election_study.pdf")
+    )
+```
+
+At this point we can use the main function `heapsofpapers::get_and_save()` to go and get those two PDFs. By default the PDFs will be saved into a folder called 'heaps_of'.
+
+```{r, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here"
+)
+```
+
+## Specify a folder
+
+By default, the papers are downloaded into a folder called 'heaps_of'. You could also specify the directory, for instance, if you would prefer a folder called 'inputs'. Regardless, if the folder doesn't exist then you'll be asked whether you want to create it.
+
+```{r diff_directory, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  dir = "inputs"
+)
+```
+
+## Consider duplicates
+
+Let's say that you had already downloaded some PDFs, but weren't sure and didn't want to download them again. You could use `heapsofpapers::check_for_existence()` to check.
+
+```{r checkexistence, eval = FALSE}
+heapsofpapers::check_for_existence(data = two_pdfs, 
+                                   save_names = "save_here")
+```
+
+If you already have some of the files then `heapsofpapers::get_and_save()` allows you to ignore those files, and not download them again, by specifying that `dupe_strategy = "ignore"`. 
+
+```{r showdupexample, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  dupe_strategy = "ignore"
+)
+```
+
+## Change the delay
+
+By default `heapsofpapers::get_and_save()` waits five seconds between each attempt to get a PDF. You can change this by specifying an integer that is at least one. The function will then wait that many seconds. It's not possible to set a delay of zero.
+
+
+```{r examplechangedelay, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  delay = 2,
+)
+```
+
+
+## Change the print strategy
+
+By default `heapsofpapers::get_and_save()` will print every time it finishes with a row in your dataframe. But you can change that behaviour by specifying how often you would like it to print. For instance to print at every second row, specify an integer 2, to print every tenth, specify 10. 
+
+```{r examplechangeprint, eval = FALSE}
+heapsofpapers::get_and_save(
+  data = two_pdfs,
+  links = "locations_are",
+  save_names = "save_here",
+  print_every = 2
+)
+```
+
+
+## Piping 
+
+Rather than specify the data, it is possible to pipe a dataset to `heapsofpapers::get_and_save()`:
+
+```{r examplepiping, eval = FALSE}
+two_pdfs %>% 
+  heapsofpapers::get_and_save(
+    links = "locations_are",
+    save_names = "save_here"
+    )
+```
+
+

@@ -50,7 +50,7 @@ heapsofpapers::get_and_save(
   data = two_pdfs,
   links = "locations_are",
   save_names = "save_here",
-  dir = "./inputs"
+  dir = "inputs"
 )
 ```
 
@@ -61,6 +61,6 @@ Now we can check which of these we have.
 ```{r, eval = FALSE}
 heapsofpapers::check_for_existence(data = two_pdfs, 
                                    save_names = "save_here",
-                                   dir = "./inputs")
+                                   dir = "inputs")
 ```
 
