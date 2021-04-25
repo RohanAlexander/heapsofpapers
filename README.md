@@ -34,8 +34,9 @@ devtools::install_github("RohanAlexander/heapsofpapers")
 
 ## Example
 
-Here is an example of getting two papers from SocArXiv, using the main
-function `heapsofpapers::get_and_save()`:
+Here is an example of getting two papers from
+[SocArXiv](https://osf.io/preprints/socarxiv), using the main function
+`heapsofpapers::get_and_save()`:
 
 ``` r
 library(heapsofpapers)
