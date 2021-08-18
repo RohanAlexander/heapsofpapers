@@ -23,6 +23,9 @@ test_that("check_for_existence creates the directory if passed a directory that 
 
 test_that("check_for_existence identifies one file that already exists in directory", {
 
+  skip_if_offline()
+  skip_on_cran()
+
   one_pdf <-
     tibble::tibble(
       locations_are = c("https://osf.io/preprints/socarxiv/z4qg9/download"),
@@ -55,6 +58,10 @@ test_that("check_for_existence identifies one file that already exists in direct
 
 
 test_that("check_for_existence identifies a file that already exists in a specified directory", {
+
+  skip_if_offline()
+  skip_on_cran()
+
   one_pdf <-
     tibble::tibble(
       locations_are = c("https://osf.io/preprints/socarxiv/a29h8/download"),
