@@ -1,16 +1,10 @@
-# heapsofpapers 0.1.0
-
 ## Test environments
-
-* local macOS install, R 4.0.3
-* macOS (on github actions), release 
-* ubuntu 20.04 (on github actions), release
-* windows (on github actions), release
+* local R installation, R 4.0.3
+* ubuntu 16.04 (on travis-ci), R 4.0.3
+* win-builder (devel)
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs, or  NOTEs.
+0 errors | 0 warnings | 1 note
 
-## Reverse dependencies
-
-This package currently has no reverse dependencies.
+* This is a new release.
