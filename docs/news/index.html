@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>get_these_and_save_them — get_and_save • heapsofpapers</title>
+<title>Changelog • heapsofpapers</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,12 +46,7 @@
 
 
 
-<meta property="og:title" content="get_these_and_save_them — get_and_save" />
-<meta property="og:description" content="The get_and_save function works with a tibble of
-locations (usually URLs) and file names, and then downloads the PDF from the
-location to the file name, saving as it goes, and letting you know where it's
-up to. It politely waits around 5 seconds between calls to the
-location, and skips locations that give an error." />
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -71,7 +66,7 @@ location, and skips locations that give an error." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -147,100 +142,25 @@ location, and skips locations that give an error." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>get_these_and_save_them</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RohanAlexander/heapsofpapers/blob/master/R/get_and_save.R'><code>R/get_and_save.R</code></a></small>
-    <div class="hidden name"><code>get_and_save.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/RohanAlexander/heapsofpapers/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>The <code>get_and_save</code> function works with a tibble of
-locations (usually URLs) and file names, and then downloads the PDF from the
-location to the file name, saving as it goes, and letting you know where it's
-up to. It politely waits around 5 seconds between calls to the
-location, and skips locations that give an error.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>get_and_save</span><span class='op'>(</span>
-  <span class='va'>data</span>,
-  links <span class='op'>=</span> <span class='st'>"links"</span>,
-  save_names <span class='op'>=</span> <span class='st'>"save_names"</span>,
-  dir <span class='op'>=</span> <span class='st'>"heaps_of"</span>,
-  bucket <span class='op'>=</span> <span class='cn'>NULL</span>,
-  delay <span class='op'>=</span> <span class='fl'>5</span>,
-  print_every <span class='op'>=</span> <span class='fl'>1</span>,
-  dupe_strategy <span class='op'>=</span> <span class='st'>"overwrite"</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>A dataframe that contains URLs that you want to download and the names
-that you want to save them as.</p></td>
-    </tr>
-    <tr>
-      <th>links</th>
-      <td><p>The name of the column whose values should be the URLs that you
-want to download, <code>links</code> by default.</p></td>
-    </tr>
-    <tr>
-      <th>save_names</th>
-      <td><p>The name of the column whose values should be the saved
-file names where the downloaded file will be saved, <code>save_names</code> by default.</p></td>
-    </tr>
-    <tr>
-      <th>dir</th>
-      <td><p>The directory to download files to, current working directory by default.</p></td>
-    </tr>
-    <tr>
-      <th>bucket</th>
-      <td><p>name of AWS S3 bucket to save files to.</p></td>
-    </tr>
-    <tr>
-      <th>delay</th>
-      <td><p>The number of seconds to wait between downloads, default (and
-minimum) is five seconds. We automatically add a bit of noise to lessen the effect
-on systematic processes that might be otherwise working.</p></td>
-    </tr>
-    <tr>
-      <th>print_every</th>
-      <td><p>The default is that you get a print message for every file, but
-you can change this. If you want to print an update for every second file then
-set this equal to 2, for a printed update every tenth file, set it to 10, etc.</p></td>
-    </tr>
-    <tr>
-      <th>dupe_strategy</th>
-      <td><p>There are a variety of ways of dealing with the situation where
-you already have some of the files downloaded. By default the function will just get
-them again and overwrite. However you can also specify 'ignore' in which case those
-files will be ignored. You can also investigate duplicates yourself using heapsofpapers::check_for_existence().</p></td>
-    </tr>
-    </table>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='va'>two_pdfs</span> <span class='op'>&lt;-</span>
-<span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
-  locations_are <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"https://osf.io/preprints/socarxiv/z4qg9/download"</span>,
-                    <span class='st'>"https://osf.io/preprints/socarxiv/a29h8/download"</span><span class='op'>)</span>,
-  save_here <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"competing_effects_on_the_average_age_of_infant_death.pdf"</span>,
-                <span class='st'>"cesr_an_r_package_for_the_canadian_election_study.pdf"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='fu'>heapsofpapers</span><span class='fu'>::</span><span class='fu'>get_and_save</span><span class='op'>(</span>
-data <span class='op'>=</span> <span class='va'>two_pdfs</span>,
-links <span class='op'>=</span> <span class='st'>"locations_are"</span>,
-save_names <span class='op'>=</span> <span class='st'>"save_here"</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): object 'two_pdfs' not found</span></div><div class='input'>
-</div></pre>
+    <div id="heapsofpapers-010" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.0">
+<a href="#heapsofpapers-010" class="anchor"></a>heapsofpapers 0.1.0</h1>
+<ul>
+<li>Initial release!</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 

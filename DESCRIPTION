@@ -1,38 +1,41 @@
 Package: heapsofpapers
-Title: Easily Download Heaps of PDFs, CSVs, or Whatever Else you can List
+Title: Easily Download Heaps of PDF and CSV Files
 Version: 0.1.0
-Authors@R: c(
-    person(given = "Rohan",
-           family = "Alexander",
-           role = c("aut", "cre"),
-           email = "rohan.alexander@utoronto.ca",
-           comment = c(ORCID = "0000-0003-1279-0700")),
-    person(given = "A",
-           family = "Mahfouz",
-           role = c("aut"))
-           )
-Description: Makes it easy to download a large number of files such as PDFs, CSVs and others.
+Authors@R: 
+    c(person(given = "Rohan",
+             family = "Alexander",
+             role = c("aut", "cre", "cph"),
+             email = "rohan.alexander@utoronto.ca",
+             comment = c(ORCID = "0000-0003-1279-0700")),
+      person(given = "A",
+             family = "Mahfouz",
+             role = "aut"))
+Description: Makes it easy to download a large number of files such as PDF files 
+    and CSV files, while automatically slowing down requests, letting you know 
+    where it is up to, and adjusting for files that have already been downloaded.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: false
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
 URL: https://github.com/RohanAlexander/heapsofpapers
 BugReports: https://github.com/RohanAlexander/heapsofpapers/issues
 Imports: 
-    magrittr,
-    utils,
-    dplyr,
     aws.s3,
-    rlang,
-    mockr,
     curl,
+    dplyr,
+    fs,
+    magrittr,
+    rlang,
     scales,
-    fs
+    utils
 Suggests: 
     knitr,
-    tibble,
     rmarkdown,
-    testthat (>= 3.0.0)
-VignetteBuilder: knitr
+    spelling,
+    testthat (>= 3.0.0),
+    tibble
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: false
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
