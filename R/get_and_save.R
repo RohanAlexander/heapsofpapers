@@ -20,11 +20,16 @@
 #' @param dupe_strategy There are a variety of ways of dealing with the situation where
 #' you already have some of the files downloaded. By default the function will just get
 #' them again and overwrite. However you can also specify 'ignore' in which case those
-#' files will be ignored. You can also investigate duplicates yourself using heapsofpapers::check_for_existence().
+#' files will be ignored. You can also investigate duplicates yourself using
+#' heapsofpapers::check_for_existence().
+#'
+#' @return A print statement in the console about whether each of the `links` was
+#' saved (if not turned off by the user), and notification that the function has
+#' finished.
 #'
 #' @description The `get_and_save` function works with a tibble of
 #' locations (usually URLs) and file names, and then downloads the PDF from the
-#' location to the file name, saving as it goes, and letting you know where it's
+#' location to the file name, saving as it goes, and letting you know where it is
 #' up to. It politely waits around 5 seconds between calls to the
 #' location, and skips locations that give an error.
 #'
@@ -59,13 +64,6 @@ get_and_save <-
       stop("The specified value to save_names is not a character.")
     }
 
-    # if (dir == "heaps_of" & ) {
-    #   dir.create("heaps_of")
-    #   dir <- normalizePath("heaps_of")
-    # } else {
-    #   dir <- normalizePath(dir)
-    # }
-
     if (isFALSE(fs::dir_exists(dir))){
       ask <- utils::askYesNo("The specified directory does not exist. Would you like it to be created?")
 
@@ -83,9 +81,6 @@ get_and_save <-
     if (!is.numeric(print_every)){
       stop("The specified value to print_every is not a number - please either leave blank or specify a number.")
     }
-
-    # A has a check for PDF in the links column - that's a good idea, but limits the use - could ask the user to specific?
-    # A has a check for PDF in the save_names column - that's a good idea, but limits the use - could ask the user to specify?
 
     if (dupe_strategy == "ignore") {
       data <-
@@ -106,51 +101,44 @@ get_and_save <-
         url <- data[i, ] %>% dplyr::pull(links)
         file_name <- data[i, ] %>% dplyr::pull(save_names)
 
-        # if no bucket is specified, save to disk
+        # If no bucket is specified, save to disk
         if (is.null(bucket)) {
 
           save_path <- fs::path(fs::path_real(dir), file_name)
 
-          # if(!httr::http_error(url)) {
-            tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
-                     error = function(e) print(paste(url, 'Did not download'))) %>%
+          tryCatch(utils::download.file(url, save_path, method = "auto", mode = "wb", quiet = TRUE),
+                   error = function(e) print(paste(url, 'Did not download'))) %>%
             suppressWarnings()
+          } else {
+            # Check system environment for s3 credentials
+            if (nchar(Sys.getenv("AWS_ACCESS_KEY_ID")) < 16) {
+              warning('AWS_ACCESS_KEY_ID environment variable not set. Use Sys.setenv("AWS_ACCESS_KEY_ID" = "your-key-here") to set the key ID.')
+              }
+            if (nchar(Sys.getenv("AWS_SECRET_ACCESS_KEY")) < 16) {
+              warning('AWS_SECRET_ACCESS_KEY environment variable not set. Use Sys.setenv("AWS_SECRET_ACCESS_KEY" = "your-secret-key") to set the secret key.')
+              }
+            if(nchar(Sys.getenv("AWS_DEFAULT_REGION")) < 2) {
+              warning('AWS_DEFAULT_REGION environment variable not set. Use Sys.setenv("AWS_DEFAULT_REGION" = "aws-region-name") to set the region.')
+              }
+            # Check that the bucket is accessible with given credentials
+            if (!aws.s3::bucket_exists(bucket)) {
+              stop(paste0("Could not access ", bucket, ". Check bucket name and/or credentials."))
+              }
+            # Write to s3 bucket
+            aws.s3::s3write_using(url,
+                                  FUN = utils::download.file,
+                                  mode = "wb",
+                                  bucket = bucket,
+                                  object = file_name)
+            }
 
-          # } else {
-          #   print(paste(url, 'Did not download'))
-          # }
-
-        } else {
-          # check system environment for s3 credentials
-          if (nchar(Sys.getenv("AWS_ACCESS_KEY_ID")) < 16) {
-            warning('AWS_ACCESS_KEY_ID environment variable not set. Use Sys.setenv("AWS_ACCESS_KEY_ID" = "your-key-here") to set the key ID.')
-          }
-          if (nchar(Sys.getenv("AWS_SECRET_ACCESS_KEY")) < 16) {
-            warning('AWS_SECRET_ACCESS_KEY environment variable not set. Use Sys.setenv("AWS_SECRET_ACCESS_KEY" = "your-secret-key") to set the secret key.')
-          }
-          if(nchar(Sys.getenv("AWS_DEFAULT_REGION")) < 2) {
-            warning('AWS_DEFAULT_REGION environment variable not set. Use Sys.setenv("AWS_DEFAULT_REGION" = "aws-region-name") to set the region.')
-          }
-
-          # check that the bucket is accessible with given credentials
-          if (!aws.s3::bucket_exists(bucket)) {
-            stop(paste0("Could not access ", bucket, ". Check bucket name and/or credentials."))
-          }
-          # write to s3 bucket
-          aws.s3::s3write_using(url,
-                                FUN = utils::download.file,
-                                mode = "wb",
-                                bucket = bucket,
-                                object = file_name)
-        }
-
-        # Let the user know where it's up to
+        # Let the user know where it is up to
         # Check if the file downloaded:
         got_file <- fs::file_exists(save_path)
         if (got_file == TRUE) {
-          message <- paste0("The file from ", url, " has been saved to ", save_path, " at ", Sys.time(), ". You're done with ", scales::percent(i / nrow(data)), ".")
+          message <- paste0("The file from ", url, " has been saved to ", save_path, " at ", Sys.time(), ". You are done with ", scales::percent(i / nrow(data)), ".")
         } else {
-          message <- paste0("The file from ", url, " was not saved at ", Sys.time(), ". It was meant to save to ", save_path,".  You're done with ", scales::percent(i / nrow(data)), ".")
+          message <- paste0("The file from ", url, " was not saved at ", Sys.time(), ". It was meant to save to ", save_path,".  You are done with ", scales::percent(i / nrow(data)), ".")
         }
 
         if (i%%print_every == 0) {
@@ -162,7 +150,7 @@ get_and_save <-
           # No need to pause after the last file
           print("All done!")
         } else if (got_file == FALSE) {
-          # No need to pause if the file wasn't downloaded
+          # No need to pause if the file was not downloaded
           Sys.sleep(0)
         } else {
         Sys.sleep(
@@ -171,5 +159,6 @@ get_and_save <-
         )
         }
     }
+
   }
 

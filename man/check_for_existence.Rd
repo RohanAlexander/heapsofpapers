@@ -15,10 +15,14 @@ file names where the downloaded file will be saved, \code{save_names} by default
 
 \item{dir}{The directory to download files to, current working directory by default.}
 }
+\value{
+The \code{data} dataframe with a column specifying whether the file has
+been downloaded.
+}
 \description{
-The \code{check_for_existence} function looks at the folder that you're
-going to save your PDFs to and checks whether you've already got any of them. It
-then suggests that you filter to remove them.
+The \code{check_for_existence} function looks at the folder that you
+are going to save your PDFs to and checks whether you have already got any of
+them. It then suggests that you filter to remove them.
 }
 \examples{
 \dontrun{two_pdfs <-

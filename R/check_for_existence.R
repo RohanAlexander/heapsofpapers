@@ -10,9 +10,12 @@
 #' file names where the downloaded file will be saved, `save_names` by default.
 #' @param dir The directory to download files to, current working directory by default.
 #'
-#' @description The `check_for_existence` function looks at the folder that you're
-#' going to save your PDFs to and checks whether you've already got any of them. It
-#' then suggests that you filter to remove them.
+#' @description The `check_for_existence` function looks at the folder that you
+#' are going to save your PDFs to and checks whether you have already got any of
+#' them. It then suggests that you filter to remove them.
+#'
+#' @return The `data` dataframe with a column specifying whether the file has
+#' been downloaded.
 #'
 #' @examples
 #' \dontrun{two_pdfs <-
@@ -45,7 +48,7 @@ check_for_existence <-
         }
       }
 
-    # Check what's already been downloaded
+    # Check what has already been downloaded
     already_got <-
       fs::dir_ls(path = dir, recurse = TRUE)
 
@@ -63,7 +66,7 @@ check_for_existence <-
     already_got_this_number <- sum(data$got_this_already, na.rm = TRUE)
 
     if (already_got_this_number == 0) {
-      message <- paste0("You don't have any of these.")
+      message <- paste0("You do not have any of these.")
     } else (
       message <- paste0("You already have ", already_got_this_number, " of these. Consider filtering before running `get_and_save()` or running `get_and_save()` with dupe_strategy = 'ignore'.")
     )

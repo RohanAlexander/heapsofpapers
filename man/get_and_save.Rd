@@ -40,12 +40,18 @@ set this equal to 2, for a printed update every tenth file, set it to 10, etc.}
 \item{dupe_strategy}{There are a variety of ways of dealing with the situation where
 you already have some of the files downloaded. By default the function will just get
 them again and overwrite. However you can also specify 'ignore' in which case those
-files will be ignored. You can also investigate duplicates yourself using heapsofpapers::check_for_existence().}
+files will be ignored. You can also investigate duplicates yourself using
+heapsofpapers::check_for_existence().}
+}
+\value{
+A print statement in the console about whether each of the \code{links} was
+saved (if not turned off by the user), and notification that the function has
+finished.
 }
 \description{
 The \code{get_and_save} function works with a tibble of
 locations (usually URLs) and file names, and then downloads the PDF from the
-location to the file name, saving as it goes, and letting you know where it's
+location to the file name, saving as it goes, and letting you know where it is
 up to. It politely waits around 5 seconds between calls to the
 location, and skips locations that give an error.
 }
