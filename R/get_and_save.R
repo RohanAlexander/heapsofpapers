@@ -22,6 +22,11 @@
 #' them again and overwrite. However you can also specify 'ignore' in which case those
 #' files will be ignored. You can also investigate duplicates yourself using
 #' heapsofpapers::check_for_existence().
+#' @param notify a character vector of emails to notify to.
+#' @param email_usr,email_pwd,email_host,email_port strings to indicate the
+#' names of the environment variables containing the required parameters to send
+#' an email (e.g. variables containing something such as 'mail@outlook.com',
+#' 'confidentialandsecure', 'smtp.office365.com', 587)
 #'
 #' @return A print statement in the console about whether each of the `links` was
 #' saved (if not turned off by the user), and notification that the function has
@@ -50,7 +55,11 @@
 #'}
 #' @importFrom rlang .data
 get_and_save <-
-  function(data, links = "links", save_names = "save_names", dir = "heaps_of", bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite"){
+  function(data, links = "links", save_names = "save_names", dir = "heaps_of",
+           bucket = NULL, delay = 5, print_every = 1, dupe_strategy = "overwrite",
+           notify = NULL, email_usr = "HEAPS_SMTP_USER", email_pwd = "HEAPS_SMTP_PASSWORD",
+           email_host = "HEAPS_SMTP_HOST",
+           email_port = "HEAPS_SMTP_PORT"){
 
     if (isFALSE(curl::has_internet())) {
       stop("The function get_and_save() needs the internet, but isn't able to find a connection right now.")
@@ -158,6 +167,27 @@ get_and_save <-
                  size = 1)
         )
         }
+    }
+
+    if (!is.null(notify)) {
+      email <- blastula::compose_email(
+        body = blastula::md("Hello. The download was completed. Have a good day!"),
+        footer = blastula::md("This is an automated email created with the heapsofpapers R package.")
+      )
+
+      email %>%
+        blastula::smtp_send(
+          to = notify,
+          from = Sys.getenv(email_usr, unset = NA),
+          subject = "heapsofpapers: The download was completed",
+          credentials = blastula::creds_envvar(
+            user = Sys.getenv(email_usr, unset = NA),
+            pass_envvar = email_pwd,
+            host = Sys.getenv(email_host, unset = NA),
+            port = Sys.getenv(email_port, unset = NA),
+            use_ssl = TRUE
+          )
+        )
     }
 
   }
