@@ -170,6 +170,10 @@ get_and_save <-
     }
 
     if (!is.null(notify)) {
+      if (isFALSE(requireNamespace("blastula", quietly = TRUE))) {
+        stop("heapsofpapers requires blastula to send emails.")
+      }
+
       email <- blastula::compose_email(
         body = blastula::md("Hello. The download was completed. Have a good day!"),
         footer = blastula::md("This is an automated email created with the heapsofpapers R package.")
