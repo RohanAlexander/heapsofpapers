@@ -6,6 +6,10 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/RohanAlexander/heapsofpapers/workflows/R-CMD-check/badge.svg)](https://github.com/RohanAlexander/heapsofpapers/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/heapsofpapers)](https://www.r-pkg.org/badges/version/heapsofpapers)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/heapsofpapers?color=blue)](https://r-pkg.org/pkg/heapsofpapers)
 <!-- badges: end -->
 
 The goal of `heapsofpapers` is to make it easy to respectfully get,
@@ -25,10 +29,15 @@ downloaded.
 
 ## Installation
 
-You can install `heapsofpapers` from [GitHub](https://github.com/) with:
+You can intall the released version of `heapsofpapers` from CRAN:
 
 ``` r
-# install.packages("devtools")
+install.packages("heapsofpapers")
+```
+
+or the development version from GitHub with:
+
+``` r
 devtools::install_github("RohanAlexander/heapsofpapers")
 ```
 
@@ -149,6 +158,6 @@ Please cite the package if you use it: Alexander, Rohan, and A Mahfouz,
 
 ## Thanks
 
-We thank Alex Luscombe, Amy Farrow, Edward Morgan, Monica Alexander,
-Paul A. Hodgetts, Sharla Gelfand, Thomas William Rosenthal, and Tom
-Cardoso for their help.
+We thank Alex Luscombe, Amy Farrow, Edward Morgan, Gregor Seyer, Monica
+Alexander, Paul A. Hodgetts, Sharla Gelfand, Thomas William Rosenthal,
+and Tom Cardoso for their help.
