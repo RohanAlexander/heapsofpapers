@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>check_for_existence — check_for_existence • heapsofpapers</title>
+<title>Articles • heapsofpapers</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,14 +46,11 @@
 
 
 
-<meta property="og:title" content="check_for_existence — check_for_existence" />
-<meta property="og:description" content="The check_for_existence function looks at the folder that you
-are going to save your PDFs to and checks whether you have already got any of
-them. It then suggests that you filter to remove them." />
+<meta property="og:title" content="Articles" />
 <meta property="og:image" content="/logo.png" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -69,7 +66,7 @@ them. It then suggests that you filter to remove them." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -82,7 +79,7 @@ them. It then suggests that you filter to remove them." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">heapsofpapers</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.9000</span>
       </span>
     </div>
 
@@ -145,66 +142,26 @@ them. It then suggests that you filter to remove them." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>check_for_existence</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RohanAlexander/heapsofpapers/blob/master/R/check_for_existence.R'><code>R/check_for_existence.R</code></a></small>
-    <div class="hidden name"><code>check_for_existence.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>The <code>check_for_existence</code> function looks at the folder that you
-are going to save your PDFs to and checks whether you have already got any of
-them. It then suggests that you filter to remove them.</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <dl>
+        <dt><a href="get_csvs.html">Getting CSVs</a></dt>
+        <dd></dt>
+        <dt><a href="get_html.html">Getting html</a></dt>
+        <dd></dt>
+        <dt><a href="get_pdfs.html">Getting PDFs from pre-print servers</a></dt>
+        <dd></dt>
+        <dt><a href="heapsofpapers.html">Introduction to heapsofpapers</a></dt>
+        <dd></dt>
+        <dt><a href="s3_setup.html">Setting Up AWS S3 Credentials</a></dt>
+        <dd></dt>
+      </dl>
     </div>
-
-    <pre class="usage"><span class='fu'>check_for_existence</span><span class='op'>(</span><span class='va'>data</span>, save_names <span class='op'>=</span> <span class='st'>"save_names"</span>, dir <span class='op'>=</span> <span class='st'>"heaps_of"</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>A dataframe that contains URLs that you want to download and the names
-that you want to save them as.</p></td>
-    </tr>
-    <tr>
-      <th>save_names</th>
-      <td><p>The name of the column whose values should be the saved
-file names where the downloaded file will be saved, <code>save_names</code> by default.</p></td>
-    </tr>
-    <tr>
-      <th>dir</th>
-      <td><p>The directory to download files to, current working directory by default.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>The <code>data</code> dataframe with a column specifying whether the file has
-been downloaded.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='va'>two_pdfs</span> <span class='op'>&lt;-</span>
- <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
-  locations_are <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"https://osf.io/preprints/socarxiv/z4qg9/download"</span>,
-    <span class='st'>"https://osf.io/preprints/socarxiv/a29h8/download"</span><span class='op'>)</span>,
-  save_here <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"competing_effects_on_the_average_age_of_infant_death.pdf"</span>,
-     <span class='st'>"cesr_an_r_package_for_the_canadian_election_study.pdf"</span><span class='op'>)</span>
-   <span class='op'>)</span>
-
-<span class='fu'>heapsofpapers</span><span class='fu'>::</span><span class='fu'><a href='get_and_save.html'>get_and_save</a></span><span class='op'>(</span>
-data <span class='op'>=</span> <span class='va'>two_pdfs</span>,
-links <span class='op'>=</span> <span class='st'>"locations_are"</span>,
-save_names <span class='op'>=</span> <span class='st'>"save_here"</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in is.data.frame(data): object 'two_pdfs' not found</span></div><div class='input'>
-<span class='fu'>heapsofpapers</span><span class='fu'>::</span><span class='fu'>check_for_existence</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>two_pdfs</span>, save_names <span class='op'>=</span> <span class='st'>"save_here"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; The specified directory does not exist. Would you like it to be created? (Yes/no/cancel) </div><div class='output co'>#&gt; <span class='error'>Error in dplyr::mutate(., save_names_full_path = fs::path(dir, .data[[save_names]])): object 'two_pdfs' not found</span></div><div class='input'>
-</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
   </div>
 </div>
 

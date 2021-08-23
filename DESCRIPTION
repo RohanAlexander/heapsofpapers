@@ -1,6 +1,6 @@
 Package: heapsofpapers
 Title: Easily Download Heaps of PDF and CSV Files
-Version: 0.1.9000
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Rohan",
              family = "Alexander",
