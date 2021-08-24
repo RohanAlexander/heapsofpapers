@@ -12,7 +12,12 @@ get_and_save(
   bucket = NULL,
   delay = 5,
   print_every = 1,
-  dupe_strategy = "overwrite"
+  dupe_strategy = "overwrite",
+  notify = NULL,
+  email_usr = "HEAPS_SMTP_USER",
+  email_pwd = "HEAPS_SMTP_PASSWORD",
+  email_host = "HEAPS_SMTP_HOST",
+  email_port = "HEAPS_SMTP_PORT"
 )
 }
 \arguments{
@@ -42,6 +47,13 @@ you already have some of the files downloaded. By default the function will just
 them again and overwrite. However you can also specify 'ignore' in which case those
 files will be ignored. You can also investigate duplicates yourself using
 heapsofpapers::check_for_existence().}
+
+\item{notify}{a character vector of emails to notify to.}
+
+\item{email_usr, email_pwd, email_host, email_port}{strings to indicate the
+names of the environment variables containing the required parameters to send
+an email (e.g. variables containing something such as 'mail@outlook.com',
+'confidentialandsecure', 'smtp.office365.com', 587)}
 }
 \value{
 A print statement in the console about whether each of the \code{links} was
