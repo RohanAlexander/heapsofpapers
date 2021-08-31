@@ -13,7 +13,7 @@ Authors@R:
 Description: Makes it easy to download a large number of files such as PDF files 
     and CSV files, while automatically slowing down requests, letting you know 
     where it is up to, and adjusting for files that have already been downloaded.
-License: MIT + file LICENSE
+License: Apache License (>= 2)
 URL: https://github.com/RohanAlexander/heapsofpapers
 BugReports: https://github.com/RohanAlexander/heapsofpapers/issues
 Imports: 
